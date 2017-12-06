@@ -1,0 +1,102 @@
+@keyframes inwork {
+    50% {background-color: aliceblue;}
+    50% {color:black;}
+    
+}
+
+.barcodelink {
+    text-decoration: underline;
+    color: green;
+    cursor:help;
+    
+}
+
+.avlight {
+    background-color: #66ff66;
+}
+
+.avdark {
+    background-color: #00b300;
+    color:white;
+}
+
+.inworkclass {
+    animation-name: inwork;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+} 
+
+.mechlight {
+    background-color: #ff6666;
+}
+
+.mechdark {
+    background-color: #e60000;
+    color:white;
+}
+
+.sheetylight {
+    background-color: #e59acc;
+}
+
+.sheetydark {
+    background-color: #b62f89;
+    color:white;
+}
+
+.utilitylight {
+    background-color: #ffc34d;
+}
+
+.utilitydark {
+    background-color: #e69900;
+}
+
+.compositelight {
+    background-color: #66ffff;
+}
+
+.compositedark {
+    background-color: #00b3b3;
+}
+
+.paintlight {
+    background-color: #dfff80;
+}
+
+.paintdark {
+    background-color: #99cc00;
+}
+
+.ndilight {
+    background-color: #8cd9b3;
+}
+
+.ndidark {
+    background-color: #339966;
+}
+
+.redbox {
+    background-color: red;
+    color: white;
+    
+}
+
+.mxlikebutton {
+    background: linear-gradient(to bottom, #ffffff 0%,#d0d0d0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d0d0d0',GradientType=0 );
+    border-radius: 2px;
+    border: 1px solid #AAAAAA;
+    margin: 2px 2px;
+    padding: 6px 10px;
+    display: inline-block;
+    color: #606060;
+    font-weight: bold;
+    text-decoration: none;
+    vertical-align: top;
+    position: relative;
+}
+
+.mxlikebutton:hover {
+    background: linear-gradient(#ffffff, #ffdd99);
+}
