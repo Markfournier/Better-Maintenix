@@ -1,0 +1,30 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 2,
+
+  "name": "Better Maintenix",
+  "description": "Adds Extra functions to Maintenix",
+  "version": "0.7.3",
+  "options_page": "options.html",
+  "background": {
+  },
+ "icons": { 
+     "128": "128bm.png" 
+    },
+    
+  "content_scripts": [
+    {
+      "matches": ["https://qaccess.qantas.com.au/*", "*://maintenix.qantas.com.au/*", "*://mx-psup/*", "*://mx-pstg/*"],
+      "js": ["changes.js"],
+      "css": ["customstyle.css"]
+    }
+  ],
+
+  "permissions": [
+   "activeTab", 
+   "tabs",
+   "cookies",    
+   "https://av-it-services.com/"
+   ]
+}
