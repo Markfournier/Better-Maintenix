@@ -5,7 +5,7 @@
 
   "name": "Better Maintenix",
   "description": "Adds Extra functions to Maintenix",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "options_page": "options.html",
   "background": {
   },
