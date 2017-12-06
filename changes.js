@@ -569,9 +569,9 @@ function createReadOnlyNamingConvention() {
 
 function betterFaults() {
     //    Defines the areas, trades and categories.  Havent moved this to a DB lookup as it should be fairly static
-    arealist = ["CAB", "LWE", "RWE", "MOR", "BAGS", "EMP", "FUS", "IFE"];
+    arealist = ["CAB", "LWE", "RWE", "MOR", "BAG", "EMP", "FUS", "IFE"];
     tradelist = ["AF", "AV", "SM", "ND", "FGAC", "FGBS", "PT", "UT", "FT", "FU"];
-    catlist = ["*** GREEN ***", "*** AMBER ***", "*** RED ***", "*** ERES ***"]
+    catlist = ["*** GREEN ***", "*** AMBER ***", "*** RED ***", "*** ERES ***", "*** AWR ***", "*** EGR ***"]
     regotable = document.getElementById("idTableFaultRegistration");
     parenttask = document.getElementById("idCellFoundDuringTask").childNodes[1].innerHTML;
     parenttaskspace = parenttask.indexOf(" ");
@@ -1239,7 +1239,8 @@ var jobcodes = {
     "Aids to Production": "J84101",
     "LH-Timesheets": "J80301",
     "Approved Non-Productive": "J277330",
-    "Daily 5S": "J332506"
+    "Daily 5S": "J332506",
+    "OH&S": "J236584"
 }
 
 //For the Add Step Enhancement.
