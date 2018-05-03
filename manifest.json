@@ -15,7 +15,7 @@
     
   "content_scripts": [
     {
-      "matches": ["https://qaccess.qantas.com.au/*", "*://maintenix.qantas.com.au/*", "*://mx-psup/*", "*://mx-pstg/*"],
+      "matches": ["https://qaccess.qantas.com.au/*", "*://maintenix.qantas.com.au/*", "*://mx-psup/*", "*://mx-pstg/*", "http://mxqcpdev/*"],
       "js": ["changes.js"],
       "css": ["customstyle.css"]
     }
@@ -26,5 +26,8 @@
    "tabs",
    "cookies",    
    "https://av-it-services.com/"
-   ]
+   ],
+      "web_accessible_resources": [
+    "names.json"
+  ]
 }
