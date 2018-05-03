@@ -1,0 +1,850 @@
+{
+    "737": {
+        "CAB": {
+            "FWD": {
+                "INSULATION BLANKETS": {},
+                "CEILING": {
+                    "PANELS": {},
+                    "STRUCTURE": {}
+                },
+                "LIGHTS": {},
+                "GALLEY": {
+                    "#7 (VCC)": {},
+                    "#1": {},
+                    "#2": {}
+                },
+                "ATTENDANT SEATS": {},
+                "SIDEWALL": {
+                    "STRUCTURE": {},
+                    "PANELS": {}
+                },
+                "IFE": {},
+                "DOORS": {
+                    "1R SERVICE": {},
+                    "1R SERVICE CUTOUT": {},
+                    "1L SERVICE": {},
+                    "1L ENTRY CUTOUT": {}
+                },
+                "AIRCON": {},
+                "LAV A": {},
+                "WINDOWS/PLUGS": {},
+                "FLT CONTROL CABLES": {},
+                "FLOOR": {
+                    "STRUCTURE": {},
+                    "WET AREA PANELS": {},
+                    "PANELS": {},
+                    "DRY AREA PANELS": {}
+                },
+                "EMERGENCY EQUIP": {}
+            },
+            "MID": {
+                "IFE": {},
+                "O/HEAD CTR STOWAGE": {},
+                "OVERHEAD BINS": {},
+                "EMER EXIT DOOR": {
+                    "FWD RIGHT CUTOUT": {},
+                    "AFT RIGHT CUTOUT": {},
+                    "FWD LEFT": {},
+                    "AFT LEFT": {},
+                    "FWD LEFT CUTOUT": {},
+                    "AFT LEFT CUTOUT": {},
+                    "FWD RIGHT": {},
+                    "AFT RIGHT": {}
+                },
+                "AIRCON": {},
+                "WINDOWS": {},
+                "FLOOR": {
+                    "STRUCTURE": {},
+                    "PANELS": {},
+                    "RACEWAY/CABLES": {}
+                },
+                "FLT CONTROL CABLES": {},
+                "CEILING": {
+                    "PANELS": {},
+                    "STRUCTURE": {}
+                },
+                "EMERGENCY EQUIP": {},
+                "INSULATION BLANKETS": {},
+                "SIDEWALL": {
+                    "PANELS": {},
+                    "STRUCTURE": {}
+                },
+                "LIGHTS": {},
+                "PSU": {},
+                "PAX SEATS": {}
+            },
+            "AFT": {
+                "LIGHTS": {},
+                "ATTENDANT SEATS": {},
+                "SIDEWALL": {
+                    "PANELS": {},
+                    "SIDEWALL": {}
+                },
+                "IFE": {},
+                "GALLEY #4": {
+                    "UPPER": {},
+                    "MID": {},
+                    "LOWER": {}
+                },
+                "DOORS": {
+                    "2L ENTRY CUTOUT": {},
+                    "2R SERVICE": {},
+                    "2R SERVICE CUTOUT": {},
+                    "2L ENTRY": {}
+                },
+                "AIRCON": {},
+                "LAV": {
+                    "D": {},
+                    "E": {}
+                },
+                "WINDOWS/PLUGS": {},
+                "FLT CONTROL CABLES": {},
+                "FLOOR": {
+                    "PANELS": {},
+                    "WET PANELS": {},
+                    "STRUCTURE": {},
+                    "DRY PANELS": {}
+                },
+                "EMERGENCY EQUIP": {},
+                "INSULATION BLANKETS": {},
+                "CEILING": {
+                    "PANELS": {},
+                    "STRUCTURE": {}
+                }
+            },
+            "FLT DECK": {
+                "SEATS": {},
+                "CEILING": {
+                    "PANELS": {},
+                    "STRUCTURE": {}
+                },
+                "LIGHTS": {},
+                "SIDEWALL": {
+                    "PANELS": {},
+                    "STRUCTURE": {}
+                },
+                "AIRCON": {},
+                "C/B PANELS": {},
+                "WINDOWS": {
+                    "#3": {},
+                    "#4/#5 PLUGS": {},
+                    "#1": {},
+                    "#2": {}
+                },
+                "FLT CONTROL CABLES": {},
+                "INST PANELS/PEDESTAL": {},
+                "DOORS": {},
+                "INSULATION BLANKETS": {},
+                "FLOOR": {
+                    "STRUCTURE": {},
+                    "PANELS": {}
+                },
+                "EMERGENCY EQUIP": {}
+            }
+        },
+        "BAGS": {
+            "FWD": {
+                "AIRCON": {},
+                "SLIDING CARPET": {},
+                "IFE": {},
+                "DOORS": {
+                    "E/E": {},
+                    "CARGO": {},
+                    "E/E CUTOUT": {},
+                    "CARGO CUTOUT": {},
+                    "FWD E/E": {},
+                    "FWD E/E CUTOUT": {}
+                },
+                "FLT CONTROL CABLES": {},
+                "FLOOR": {
+                    "PANELS": {},
+                    "STRUCTURE": {}
+                },
+                "AIRCON DIST BAY": {},
+                "FIRE PROTECTION": {},
+                "SIDEWALL": {
+                    "LININGS": {},
+                    "STRUCTURE": {}
+                },
+                "LWR NOSE": {},
+                "WATER": {},
+                "CEILING": {
+                    "STRUCTURE": {},
+                    "LININGS": {}
+                },
+                "LIGHTS": {}
+            },
+            "AFT": {
+                "LIGHTS": {},
+                "DOORS": {
+                    "CARGO": {},
+                    "CARGO CUTOUT": {}
+                },
+                "FLT CONTROL CABLES": {},
+                "SLIDING CARPER": {},
+                "INSULATION BLANKETS": {},
+                "FIRE PROTECTION": {},
+                "FLOOR": {
+                    "STRUCTURE": {},
+                    "PANELS": {}
+                },
+                "E6 RACK": {},
+                "WATER": {},
+                "SIDEWALL": {
+                    "LININGS": {},
+                    "STRUCTURE": {}
+                },
+                "PNEUMATIC DUCTS": {},
+                "WASTE": {},
+                "CEILING": {
+                    "LININGS": {},
+                    "STRUCTURE": {}
+                }
+            }
+        },
+        "FUS": {
+            "RADOME": {},
+            "UPPER": {
+                "SKIN": {},
+                "DORSAL": {}
+            },
+            "LOWER": {
+                "SKIN": {}
+            }
+        },
+        "EMP": {
+            "VERT STAB": {
+                "TRAILING EDGE": {
+                    "PANELS": {}
+                },
+                "SKIN": {
+                    "RIGHT PANELS": {},
+                    "LEFT": {},
+                    "LEFT PANELS": {},
+                    "SKIN": {}
+                },
+                "TIP": {},
+                "RUDDER": {
+                    "PANELS": {}
+                },
+                "LEADING EDGE": {
+                    "PANELS": {}
+                }
+            },
+            "STAB COMPT": {
+                "FLT CONTROL CABLES": {},
+                "DUCTS": {},
+                "PANELS": {}
+            },
+            "APU": {
+                "DOOR": {},
+                "INLET": {},
+                "EXHAUST": {},
+                "COMPARTMENT": {}
+            },
+            "L HORI STAB": {
+                "SKIN": {
+                    "UPPER": {},
+                    "UPPER PANELS": {},
+                    "LOWER": {},
+                    "LOWER PANELS": {}
+                },
+                "TIPS": {},
+                "LEADING EDGE": {
+                    "PANELS": {}
+                },
+                "TRAILING EDGE": {
+                    "PANELS": {}
+                },
+                "ELEVATOR": {
+                    "TAB": {},
+                    "MECHANISM": {},
+                    "PANELS": {}
+                }
+            },
+            "R HORI STAB": {
+                "SKIN": {
+                    "LOWER": {},
+                    "LOWER PANELS": {},
+                    "UPPER": {},
+                    "UPPER PANELS": {}
+                },
+                "TIPS": {},
+                "LEADING EDGE": {
+                    "PANELS": {}
+                },
+                "TRAILING EDGE": {
+                    "PANELS": {}
+                },
+                "ELEVATOR": {
+                    "PANELS": {},
+                    "TAB": {},
+                    "MECHANISM": {}
+                }
+            }
+        },
+        "MOR": {
+            "PACK": {
+                "LEFT": {},
+                "RIGHT": {}
+            },
+            "CENTER TANK": {
+                "INTERNAL": {},
+                "CUTOUT": {},
+                "PANEL": {}
+            },
+            "GEAR": {
+                "LEFT": {},
+                "RIGHT": {},
+                "NOSE": {}
+            },
+            "WHEEL WELL": {
+                "RIGHT": {
+                    "FLT CONTROL CABLES": {},
+                    "VAPOUR BARRIER": {},
+                    "HYDRAULIC": {}
+                },
+                "KEEL BEAM": {},
+                "NOSE": {
+                    "PANELS": {}
+                },
+                "LEFT": {
+                    "FLT CONTROL CABLES": {},
+                    "VAPOUR BARRIER": {},
+                    "HYDRAULIC": {}
+                }
+            },
+            "WTB": {
+                "FAIRINGS": {}
+            }
+        },
+        "LWE": {
+            "FLAPS": {
+                "INBOARD MAIN": {
+                    "PANELS": {}
+                },
+                "OUTBOARD AFT": {
+                    "PANELS": {}
+                },
+                "INBOARD AFT": {
+                    "PANELS": {}
+                },
+                "DRIVE SYSTEM": {},
+                "OUTBOARD MAIN": {
+                    "PANELS": {}
+                },
+                "TRACK": {}
+            },
+            "L.E. DEVICE": {
+                "PANELS": {},
+                "SLATS": {
+                    "PANELS": {}
+                },
+                "KRUEGER FLAP": {}
+            },
+            "L.E. CAVITY": {
+                "PANELS": {}
+            },
+            "T.E. CAVITY": {
+                "PANELS": {}
+            },
+            "SKIN": {
+                "UPPER": {},
+                "LOWER": {
+                    "PANELS": {}
+                }
+            },
+            "SPOILER": {},
+            "AILERON": {
+                "PANELS": {}
+            },
+            "FUEL TANK": {
+                "PANELS/RINGS": {},
+                "INTERNAL": {},
+                "CUTOUT": {}
+            },
+            "WINGLET": {
+                "PANELS": {}
+            },
+            "ENGINE": {
+                "COWLS": {},
+                "THRUST REVERSER": {
+                    "PANELS": {}
+                }
+            },
+            "ENG STRUT": {
+                "STRUCTURE": {},
+                "FAIRING": {}
+            }
+        },
+        "RWE": {
+            "FLAPS": {
+                "INBOARD MAIN": {
+                    "PANELS": {}
+                },
+                "OUTBOARD AFT": {
+                    "PANELS": {}
+                },
+                "INBOARD AFT": {
+                    "PANELS": {}
+                },
+                "DRIVE SYSTEM": {},
+                "OUTBOARD MAIN": {
+                    "PANELS": {}
+                },
+                "TRACK": {}
+            },
+            "L.E. DEVICE": {
+                "PANELS": {},
+                "SLATS": {
+                    "PANELS": {}
+                },
+                "KRUEGER FLAP": {}
+            },
+            "L.E. CAVITY": {
+                "PANELS": {}
+            },
+            "T.E. CAVITY": {
+                "PANELS": {}
+            },
+            "SKIN": {
+                "UPPER": {},
+                "LOWER": {
+                    "PANELS": {}
+                }
+            },
+            "SPOILER": {},
+            "AILERON": {
+                "PANELS": {}
+            },
+            "FUEL TANK": {
+                "PANELS/RINGS": {},
+                "INTERNAL": {},
+                "CUTOUT": {}
+            },
+            "WINGLET": {
+                "PANELS": {}
+            },
+            "ENGINE": {
+                "COWLS": {},
+                "THRUST REVERSER": {
+                    "PANELS": {}
+                }
+            },
+            "ENG STRUT": {
+                "STRUCTURE": {},
+                "FAIRING": {}
+            }
+        }
+    },
+    "A330": {
+        "BAG": {
+            "AFT CARGO": {
+                "CARGO LOADING SYSTEM": {},
+                "DOORS": {},
+                "ELECTRICAL": {},
+                "FIRE PROTECTION": {},
+                "FLOOR PANELS": {},
+                "INSULATION BLANKETS": {},
+                "LININGS": {},
+                "PNEUMATIC DUCTS": {},
+                "STRUCTURE": {},
+                "THS CABLE": {},
+                "VENTILATION": {},
+                "WASTE": {},
+                "WATER": {}
+            },
+            "BULK CARGO": {
+                "DOOR": {},
+                "ELECTRICAL": {},
+                "FIRE PROTECTION": {},
+                "FLOOR PANELS": {},
+                "HEATING": {},
+                "LININGS": {},
+                "STRUCTURE": {},
+                "WASTE": {},
+                "WATER": {}
+            },
+            "FWD CARGO": {
+                "CARGO LOADING SYSTEM": {},
+                "DISTRIBUTION BAY": {},
+                "DOORS": {},
+                "ELECTRICAL": {},
+                "FIRE PROTECTION": {},
+                "FLOOR PANELS": {},
+                "INSULATION BLANKETS": {},
+                "LININGS": {},
+                "PNEUMATIC DUCTS": {},
+                "STRUCTURE": {},
+                "VENTILATION": {},
+                "WASTE": {},
+                "WATER": {}
+            },
+            "MEC": {
+                "DOORS": {},
+                "DUCTING": {},
+                "ELECTRICAL": {},
+                "EQUIPMENT COOLING": {},
+                "LRU": {},
+                "OXYGEN": {},
+                "STRUCTURE": {}
+            }
+        },
+        "CAB": {
+            "A ZONE": {
+                "CEILING PANEL": {},
+                "DUCTING": {},
+                "ELECTRICAL": {},
+                "EMERGENCY EQUIPMENT": {},
+                "FLOOR BOARDS": {
+                    "WET AREA": {},
+                    "DRY AREA": {}
+                },
+                "INSULATION BLANKETS": {},
+                "LININGS": {},
+                "OVERHEAD BINS": {},
+                "PAX SEATS": {},
+                "PSU CHANNEL": {},
+                "STRUCTURE": {},
+                "VCI": {},
+                "WINDOWS": {
+                    "R/H": {},
+                    "L/H": {}
+                }
+            },
+            "ATTENDANT SEATS": {
+                "DOOR 1L": {
+                    "O/B": {},
+                    "I/B": {}
+                },
+                "DOOR 1R": {},
+                "DOOR 2L": {},
+                "DOOR 2R": {},
+                "DOOR 3L": {},
+                "DOOR 3R": {},
+                "DOOR 4R": {
+                    "FWD": {},
+                    "AFT": {}
+                },
+                "DOOR 4L": {}
+            },
+            "B ZONE": {
+                "ATTENDANT SEATS": {},
+                "CEILING PANEL": {},
+                "CURTAINS": {},
+                "DOOR": {},
+                "DOOR LININGS": {},
+                "DUCTING": {},
+                "ELECTRICAL": {},
+                "FLOOR BOARDS": {
+                    "DRY AREA": {},
+                    "WET AREA": {}
+                },
+                "FURNITURE": {},
+                "GALLEY": {},
+                "INSULATION BLANKETS": {},
+                "LAV": {},
+                "LININGS": {},
+                "OVERHEAD BINS": {},
+                "PAX SEATS": {},
+                "PSU CHANNEL": {},
+                "STRUCTURE": {},
+                "WINDOWS": {
+                    "L/H": {},
+                    "R/H": {}
+                }
+            },
+            "C ZONE": {
+                "CEILING PANEL": {},
+                "LININGS": {},
+                "OVERHEAD BINS": {},
+                "PAX SEATS": {},
+                "PSU CHANNEL": {},
+                "SEAT TRACK": {},
+                "STRUCTURE": {},
+                "WET AREA STRUCTURE": {
+                    "DOOR 3": {},
+                    "DOOR 4": {}
+                },
+                "WINDOWS": {
+                    "L/H": {},
+                    "R/H": {}
+                }
+            },
+            "DOORS": {
+                "1L": {},
+                "1R": {},
+                "2L": {},
+                "2R": {},
+                "3L": {},
+                "3R": {},
+                "4L": {},
+                "4R": {}
+            },
+            "FLT DECK": {
+                "COAT STOWAGE": {},
+                "DOOR": {},
+                "DUCTING": {},
+                "ELECTRICAL": {},
+                "EMERGENCY EQUIPMENT": {},
+                "FLOOR": {},
+                "INSULATION BLANKET": {},
+                "LININGS": {},
+                "PANELS": {},
+                "PEDESTAL": {},
+                "SEATS": {},
+                "STOWAGE": {},
+                "STRUCTURE": {},
+                "WINDOWS": {
+                    "FIXED": {},
+                    "SLIDING": {},
+                    "WINDSCREEN": {}
+                }
+            },
+            "FURNITURE": {
+                "F1": {},
+                "F11": {},
+                "F12": {},
+                "F13": {},
+                "F14": {},
+                "F15": {},
+                "F16": {},
+                "F17": {},
+                "F18": {},
+                "F2": {},
+                "F20": {},
+                "F22": {},
+                "F23": {},
+                "F3": {},
+                "F4": {},
+                "F5": {},
+                "F6": {}
+            },
+            "GALLEYS": {
+                "AFT BULKHEAD": {},
+                "G1": {},
+                "G2": {},
+                "G3": {},
+                "G4": {},
+                "G5": {},
+                "G6": {},
+                "G7": {}
+            },
+            "LAVS": {
+                "L11": {},
+                "L12": {},
+                "L34": {},
+                "L53": {},
+                "L54": {},
+                "L61": {},
+                "L62": {},
+                "L73": {},
+                "L74": {},
+                "L75": {},
+                "L76": {}
+            },
+            "STOWAGE": {
+                "S1": {},
+                "S2": {}
+            }
+        },
+        "EMP": {
+            "APU": {
+                "COMPARTMENT": {},
+                "DOOR": {},
+                "ELECTRICAL": {},
+                "EXHAUST": {},
+                "FIRE PROTECTION": {},
+                "INLET": {}
+            },
+            "L HORI STAB": {
+                "ELECTRICAL": {},
+                "ELEVATOR": {},
+                "FRONT SPAR": {},
+                "LEADING EDGE": {},
+                "REAR SPAR": {},
+                "SKIN": {},
+                "STRUCTURE": {},
+                "THS APRON": {},
+                "TIP": {},
+                "TRAILING EDGE CAVITIY": {}
+            },
+            "R HORI STAB": {
+                "ELECTRICAL": {},
+                "ELEVATOR": {},
+                "FRONT SPAR": {},
+                "LEADING EDGE": {},
+                "REAR SPAR": {},
+                "SKIN": {},
+                "STRUCTURE": {},
+                "THS APRON": {},
+                "TIP": {},
+                "TRAILING EDGE CAVITIY": {}
+            },
+            "STAB COMPT": {
+                "DUCTS": {},
+                "ELECTRICAL": {},
+                "PANELS": {},
+                "RUDDER MECH UNIT": {},
+                "THS ACTUATOR": {}
+            },
+            "VERT STAB": {
+                "ELECTRICAL": {},
+                "LEADING EDGE": {},
+                "RUDDER": {},
+                "SKIN": {},
+                "STRUCTURE": {},
+                "TIP": {},
+                "TRAILING EDGE": {}
+            }
+        },
+        "FUS": {
+            "ANTENNA": {},
+            "LOWER": {
+                "SKIN": {}
+            },
+            "RADOME": {},
+            "UPPER": {
+                "SKIN": {}
+            }
+        },
+        "LWE": {
+            "ENGINE": {
+                "COWLS": {},
+                "ELECTRICAL": {},
+                "FUEL": {},
+                "HYDRAULIC": {},
+                "PNUEMATIC": {},
+                "THRUST REVERSER": {
+                    "OUTBOARD": {},
+                    "INBOARD": {}
+                }
+            },
+            "ENGINE PYLON": {
+                "ELECTRICAL": {},
+                "FIRE PROTECTION": {},
+                "HYDRAULIC": {},
+                "PANELS": {},
+                "PNEUMATIC": {},
+                "STRUCTURE": {}
+            },
+            "FUEL TANK": {
+                "CUTOUTS": {},
+                "ELECTRICAL": {},
+                "INTERNAL": {},
+                "PANELS": {}
+            },
+            "SKIN": {
+                "LOWER": {},
+                "UPPER": {}
+            },
+            "WING LDG EDGE": {
+                "CAVITY:": {},
+                "ELECTRICAL": {},
+                "PANELS": {},
+                "PNEUMATIC": {},
+                "SLATS": {}
+            },
+            "WING TRLG EDGE": {
+                "AILERON": {},
+                "ELECTRICAL": {},
+                "FLAP DRIVE SYSTEM": {},
+                "FLAP INBOARD": {},
+                "FLAP OUTBOARD": {},
+                "FLAP TRACK": {},
+                "FLAP TRACK FAIRING": {
+                    "FIXED": {},
+                    "MOVABLE": {}
+                },
+                "HYDRAULICS": {},
+                "PANELS": {},
+                "SPOILER": {},
+                "WINGLET": {}
+            }
+        },
+        "MOR": {
+            "CENTER TANK": {
+                "PANELS": {},
+                "STRUCTURE": {
+                    "INTERNAL": {},
+                    "EXTERNAL": {}
+                }
+            },
+            "GEAR": {
+                "LEFT": {},
+                "NOSE": {},
+                "RIGHT": {}
+            },
+            "PACK": {
+                "LEFT": {},
+                "RIGHT": {}
+            },
+            "WHEEL WELL": {
+                "CPC": {},
+                "HYDRAULIC": {},
+                "LEFT": {},
+                "RIGHT": {},
+                "STRCTURE": {}
+            },
+            "WTB": {
+                "FAIRINGS": {},
+                "PANELS": {},
+                "STRUCTURE": {}
+            }
+        },
+        "RWE": {
+            "ENGINE": {
+                "COWLS": {},
+                "ELECTRICAL": {},
+                "FUEL": {},
+                "HYDRAULIC": {},
+                "PNUEMATIC": {},
+                "THRUST REVERSER": {
+                    "OUTBOARD": {},
+                    "INBOARD": {}
+                }
+            },
+            "ENGINE PYLON": {
+                "ELECTRICAL": {},
+                "FIRE PROTECTION": {},
+                "HYDRAULIC": {},
+                "PANELS": {},
+                "PNEUMATIC": {},
+                "STRUCTURE": {}
+            },
+            "FUEL TANK": {
+                "CUTOUTS": {},
+                "ELECTRICAL": {},
+                "INTERNAL": {},
+                "PANELS": {}
+            },
+            "SKIN": {
+                "LOWER": {},
+                "UPPER": {}
+            },
+            "WING LDG EDGE": {
+                "CAVITY:": {},
+                "ELECTRICAL": {},
+                "PANELS": {},
+                "PNEUMATIC": {},
+                "SLATS": {}
+            },
+            "WING TRLG EDGE": {
+                "AILERON": {},
+                "ELECTRICAL": {},
+                "FLAP DRIVE SYSTEM": {},
+                "FLAP INBOARD": {},
+                "FLAP OUTBOARD": {},
+                "FLAP TRACK": {},
+                "FLAP TRACK FAIRING": {
+                    "FIXED": {},
+                    "MOVABLE": {}
+                },
+                "HYDRAULICS": {},
+                "PANELS": {},
+                "SPOILER": {},
+                "WINGLET": {}
+            }
+        }
+    }
+}

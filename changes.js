@@ -23,10 +23,7 @@ function selectStoredFault() {
     for (i = 0; i < storedcharposition.length; i++) {
         var defectlocation = prompt("Input " + popuparray[i]);
         selected = selected.replace("$" + popuparray[i] + "$", defectlocation);
-
-        //        document.getElementById("idCellFaultName").value = document.getElementById("bm_areaselect").value + " " + document.getElementById("bm_tradeselect").value + " "+ document.getElementById("bm_catselect").value + " " + selected;
         document.getElementById("idCellFaultName").value = document.getElementById("idCellFaultName").value + " " + selected;
-        //nex section gets the scheduled hours based up the definition ID
     }
     var xhr = new XMLHttpRequest();
     var uniqueID = definitiondrop[definitiondrop.selectedIndex].getAttribute("uniquevalue");
@@ -42,6 +39,20 @@ function selectStoredFault() {
     xhr.send();
 
     document.getElementById("idCellFaultDescription").value = selected;
+}
+
+function getList(area, assemblt) {
+   a = fetch(chrome.extension.getURL('/names.json'))
+          .then((resp) => resp.json())
+
+//          .then((jdata) => jdata)
+          .then(function (jsonData) {
+            console.log(hhh);
+              console.log(jsonData);
+            return  jsonData;
+    })
+
+    
 }
 
 //Puts the fault descriptions in the drop down.  Sets the value of the option to the unique ID of the fault definition
@@ -72,18 +83,18 @@ function getStoredFaults(area, trade, assembly) {
     document.getElementById("bm_zoneselect").style.display = "none";
     document.getElementById("bm_subzoneselect").style.display = "none";
     document.getElementById("bm_subsubzoneselect").style.display = "none";
-    var xhr = new XMLHttpRequest();
-    var boof = [];
-    xhr.open("GET", "https://av-it-services.com/faultstore/fault.php?area=" + area + "&trade=" + trade + "&assy=&zone=&subzone=&subsubzone=", true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-
-            var resp = JSON.parse(xhr.responseText);
-            //            console.log(resp[0]);
-            deployStoredFaults(resp);
-        }
-    }
-    xhr.send();
+//    var xhr = new XMLHttpRequest();
+//    var boof = [];
+//    xhr.open("GET", "https://av-it-services.com/faultstore/fault.php?area=" + area + "&trade=" + trade + "&assy=&zone=&subzone=&subsubzone=", true);
+//    xhr.onreadystatechange = function () {
+//        if (xhr.readyState == 4) {
+//
+//            var resp = JSON.parse(xhr.responseText);
+//            //            console.log(resp[0]);
+//            deployStoredFaults(resp);
+//        }
+//    }
+//    xhr.send();
     document.getElementById("bm_subzoneselect").length = 0;
     document.getElementById("bm_subsubzoneselect").length = 0;
     getZones(area, assembly);
@@ -149,19 +160,15 @@ function appendTechRefs(refarray) {
 function insertPN() {
     faulttitle = document.getElementById("idCellFaultName").value;
     delinchar = faulttitle.indexOf("-");
-    //    console.log(faulttitle.substr(delinchar-7,6));
     if (faulttitle.substr(delinchar - 7, 6) == "PANELS" && document.getElementById("bm_tradeselect").value == "FGBS") {
         newfault = faulttitle.substring(0, delinchar - 1) + " PN: - "
-            //        console.log(newfault);
         document.getElementById("idCellFaultName").value = newfault;
     }
-
 }
 
 //this functions job is to add any defined faults.  Due to the direction that the business wanted to take this extension it became unused but was never removed.  It has since been found that as it sends the ASSY in the GET request to the server it is quite a good way to collect statistics around how the extension is being used.  See HTTPS://av-it-services.com/faultstore/tracking.php
 function getDefinedFaults() {
     assy = aircraftType();
-    //    console.log("!");
     area = document.getElementById("bm_areaselect").value;
     zone = document.getElementById("bm_zoneselect").value;
     subzone = document.getElementById("bm_subzoneselect").value;
@@ -172,7 +179,6 @@ function getDefinedFaults() {
     xmlreq.onreadystatechange = function () {
         if (xmlreq.readyState == 4) {
             var resp = JSON.parse(xmlreq.responseText);
-            //            deployStoredFaults(resp);
             console.log(resp);
         }
     }
@@ -181,29 +187,26 @@ function getDefinedFaults() {
 
 //Gets Zones based on area and Aircraft type
 function getZones(area, assembly) {
-    var newxhr = new XMLHttpRequest();
-    newxhr.open("GET", "https://av-it-services.com/faultstore/zone.php?area=" + area + "&assembly=" + assembly, true);
-    newxhr.onreadystatechange = function () {
-        if (newxhr.readyState == 4) {
-            var resp1 = JSON.parse(newxhr.responseText);
-            //            console.log(resp1);
-            if (resp1.length > 0) {
+    fetch(chrome.extension.getURL('/names.json'))
+          .then((resp) => resp.json())
+          .then(function (jsonData) {
+            var zonelist = Object.keys(jsonData[assembly][area]);
+            if (zonelist.length > 0) {
                 bm_zoneselect.style.display = '';
             }
             bm_zoneselect.length = 0;
             var blankoption = document.createElement("option");
             bm_zoneselect.appendChild(blankoption);
             blankoption.setAttribute("value", 0);
-            for (i = 0; i < resp1.length; i++) {
+            for (i = 0; i < zonelist.length; i++) {
                 var newoption = document.createElement("option");
                 newoption.id = i;
-                newoption.innerHTML = resp1[i][0];
-                newoption.setAttribute("value", resp1[i][1])
+                newoption.innerHTML = zonelist[i];
+                newoption.setAttribute("value", zonelist[i])
                 bm_zoneselect.appendChild(newoption);
+            
             }
-        }
-    }
-    newxhr.send()
+    })
 }
 
 //This gets the subzones based on the selected zone
@@ -212,35 +215,31 @@ function getSubZones() {
     document.getElementById("bm_subsubzoneselect").length = 0;
     var xhr = new XMLHttpRequest();
     var titlebox = document.getElementById("idCellFaultName");
-    var areaselect = document.getElementById("bm_areaselect");
+    var areaselect = document.getElementById("bm_areaselect").value;
     var tradeselect = document.getElementById("bm_tradeselect");
     var catselect = document.getElementById("bm_catselect");
-    var zoneselect = document.getElementById("bm_zoneselect");
-    titlebox.value = areaselect.value + " " + tradeselect.value + " " + catselect.value + " " + zoneselect.options[zoneselect.selectedIndex].text + " - ";
+    var zoneselect = document.getElementById("bm_zoneselect").value;
+    titlebox.value = areaselect + " " + tradeselect.value + " " + catselect.value + " " + zoneselect + " - ";
     zoneid = document.getElementById("bm_zoneselect").value;
-    xhr.open("GET", "https://av-it-services.com/faultstore/subzone.php?zone=" + zoneid, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-
-            var resp = JSON.parse(xhr.responseText);
-            //            console.log(resp);
+        fetch(chrome.extension.getURL('/names.json'))
+          .then((resp) => resp.json())
+          .then(function (jsonData) {
+            var zonelist = Object.keys(jsonData[aircraftType()][areaselect][zoneselect]);
             bm_subzoneselect.length = 0;
             var blankoption = document.createElement("option");
             bm_subzoneselect.appendChild(blankoption);
             blankoption.setAttribute("value", 0);
-            if (resp.length > 0) {
+            if (zonelist.length > 0) {
                 bm_subzoneselect.style.display = '';
             }
-            for (i = 0; i < resp.length; i++) {
+            for (i = 0; i < zonelist.length; i++) {
                 var newoption = document.createElement("option");
                 newoption.id = i;
-                newoption.innerHTML = resp[i][0];
-                newoption.setAttribute("value", resp[i][1])
+                newoption.innerHTML = zonelist[i];
+                newoption.setAttribute("value", zonelist[i])
                 bm_subzoneselect.appendChild(newoption);
-            }
-        }
-    }
-    xhr.send();
+            }      
+    })
 }
 
 function getSubSubZones() {
@@ -253,29 +252,25 @@ function getSubSubZones() {
     titlebox.value = areaselect.value + " " + tradeselect.value + " " + catselect.value + " " + zoneselect.options[zoneselect.selectedIndex].text + " " + subzoneselect.options[subzoneselect.selectedIndex].text + " - ";
     var xhr = new XMLHttpRequest();
     subzoneid = document.getElementById("bm_subzoneselect").value;
-    xhr.open("GET", "https://av-it-services.com/faultstore/subsubzone.php?subzone=" + subzoneid, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-
-            var resp = JSON.parse(xhr.responseText);
-            //            console.log(resp[0]);
+    fetch(chrome.extension.getURL('/names.json'))
+          .then((resp) => resp.json())
+          .then(function (jsonData) {
+            var zonelist = Object.keys(jsonData[aircraftType()][areaselect.value][zoneselect.value][subzoneselect.value]);
             bm_subsubzoneselect.length = 0;
             var blankoption = document.createElement("option");
             bm_subsubzoneselect.appendChild(blankoption);
             blankoption.setAttribute("value", 0);
-            if (resp.length > 0) {
+            if (zonelist.length > 0) {
                 bm_subsubzoneselect.style.display = '';
             }
-            for (i = 0; i < resp.length; i++) {
+            for (i = 0; i < zonelist.length; i++) {
                 var newoption = document.createElement("option");
                 newoption.id = i;
-                newoption.innerHTML = resp[i][0];
-                newoption.setAttribute("value", resp[i][1])
+                newoption.innerHTML = zonelist[i];
+                newoption.setAttribute("value", zonelist[i])
                 bm_subsubzoneselect.appendChild(newoption);
             }
-        }
-    }
-    xhr.send();
+    })
     insertPN();
 }
 
@@ -289,8 +284,6 @@ function addSubSubZone() {
     var subsubzoneselect = document.getElementById("bm_subsubzoneselect");
     titlebox.value = areaselect.value + " " + tradeselect.value + " " + catselect.value + " " + zoneselect.options[zoneselect.selectedIndex].text + " " + subzoneselect.options[subzoneselect.selectedIndex].text + " " + subsubzoneselect.options[subsubzoneselect.selectedIndex].text + " - ";
     insertPN();
-    //      The following was moved to the mainrun() function so that it would make a GET request everytime the fault page would load.  This is because its currently being used to collect statistics on who is using the extension
-    //    getDefinedFaults();
 }
 
 function redHighlight(selectedelement) {
@@ -517,7 +510,7 @@ function aircraftType() {
     if (inventoryRE.test(document.getElementById("idCellAircraftInventory").childNodes[1].innerHTML) == true){
         inventory = "HAL";
     }
-    console.log(inventory);
+//    console.log(inventory);
     return inventory;
 }
 
@@ -547,24 +540,6 @@ function quickJobButtons() {
         maindiv = document.getElementById("idPostHeaderSection");
         maindiv.appendChild(newbutton);
     }
-}
-
-//Create a place to put a read only box for the naming conventions.  Another example of a feature that wasnt implemented due to my hurt feelings
-function createReadOnlyNamingConvention() {
-    qfbrow = document.getElementById("quickrow");
-    console.log(qfbrow.nextSibling);
-    rocell = qfbrow.nextSibling.insertCell(1);
-    qfbrow.nextSibling.insertCell(3);
-    rocell.id = "bm_rocell";
-    cellwithfaultname = document.getElementById("idCellFaultName").parentNode;
-    cellwithfaultname.setAttribute("colspan", "2");
-    //    var robox = document.createElement("input");
-    //    rocell.appendChild(robox);
-    //    robox.readOnly = true;
-    document.getElementById("idCellFaultName").style.width = "330px";
-    //    cellwithfaultname.removeAttribute("colspan");
-
-
 }
 
 function betterFaults() {
@@ -610,8 +585,7 @@ function betterFaults() {
     var definitionspan = document.createElement("span");
     definitionspan.id = "definitionarea";
     cell2.appendChild(definitionspan);
-    //	var opt3 = document.createElement("option")
-    //	workareaselect.appendChild(opt3);
+
 
     document.getElementById("bm_areaselect").addEventListener("change", function () {
         addAreaToTitle()
@@ -649,20 +623,7 @@ function betterFaults() {
         opt.appendChild(newopt);
         catselect.appendChild(opt);
     }
-    //	document.getElementById("idLabelFaultSource").parentNode.style.display = "none";
-    //	document.getElementById("idLabelLogbookType").parentNode.style.display = "none";
-    //	document.getElementById("idLabelRecurrenceOf").parentNode.style.display = "none";
-    //	document.getElementById("idLabelFaultPriority").style.visibility = "collapse";
-    //	document.getElementById("idSelect8").style.visibility = "collapse";
-    //	document.getElementById("idLabelFlightSafetyImpact").parentNode.style.display = "none";
-    //	resultingeventsbandhead = document.getElementById("idGrpResultingEvents").parentNode;
-    //	resultingeventsbandbody = resultingeventsbandhead.nextElementSibling;
-    //	resultingeventsbandhead.style.display = "none";
-    //	resultingeventsbandbody.style.display = "none";
-    //	whattodobandhead = document.getElementById("idGrpWhatToDo").parentNode;
-    //	whattodobandbody = whattodobandhead.nextElementSibling;
-    //	whattodobandbody.style.display = "none";
-    //	whattodobandhead.style.display = "none";
+
     if (document.getElementById("idCellFaultName").value == '') {
         document.getElementById("idCellFaultName").value = "CAB AF *** GREEN *** ";
         document.getElementById("idSelect9").value = "MECH";
@@ -672,23 +633,17 @@ function betterFaults() {
         refreshitems = mapTitleTrade()
     }
 
-    //	document.getElementById("idSelect9").value = "AVIONICS";
     document.getElementById("idLabelScheduledHours").style.display = "";
     document.getElementById("idCellScheduledHours").style.display = "";
-    //	document.getElementById("idLabelLogbookRef").style.display = "none";
-    //	document.getElementById("idInput23").style.display = "none";
     document.getElementById("idCellFaultName").focus();
-    getStoredFaults(refreshitems[0], refreshitems[1], aircraftType());
     document.getElementById("bm_zoneselect").style.display = "none";
     document.getElementById("bm_subzoneselect").style.display = "none";
     document.getElementById("bm_subsubzoneselect").style.display = "none";
-    //    createReadOnlyNamingConvention()
 }
 
 function seperateTitle(faulttitle) {
     stars = faulttitle.lastIndexOf("***");
     lastspace = faulttitle.indexOf(" ", stars + 5);
-    //    lastspace = faulttitle.indexOf("-");
     return lastspace;
 }
 
@@ -986,7 +941,6 @@ function getSel() {
 //Wrap selected text with defined tags
 function wrapSelection(element) {
     a = getSel();
-    //    console.log(element);
     opentag = "<" + element + ">";
     if (element.indexOf("span") != -1) {
         closetag = "</span>";
@@ -997,9 +951,6 @@ function wrapSelection(element) {
     beforeselection = txtarea.value.substring(0, a[0]);
     afterselection = txtarea.value.substring(a[1]);
     selection = txtarea.value.slice(a[0], a[1]);
-    //    console.log(beforeselection);
-    //    console.log(selection);
-    //    console.log(afterselection);
     selection = opentag + selection + closetag;
     txtarea.value = beforeselection + selection + afterselection;
     charCounter();
@@ -1077,33 +1028,19 @@ function parseTheBox(boxid) {
         leadingstring = document.getElementById(boxid).innerHTML.slice(0, matchloc + 1+stringoffset);
         barcodestring = document.getElementById(boxid).innerHTML.slice(matchloc + 1+stringoffset, matchloc + 9+stringoffset);
         trailingstring = document.getElementById(boxid).innerHTML.slice(matchloc + 9+stringoffset);
-//        stringlocations.push(barcodestring);
+
         stringlocations[barcodestring] = matchloc+lastindex;
         lastindex = matchloc;
-//        console.log(stringlocations);
-//        console.log(matchloc);
-        
-    
         singlediv = singlediv.slice(lastindex+9);
-//        console.log(singlediv);
         matchloc = singlediv.search(barcodeRE);
-//        console.log(stringlocations);
-//        console.log(lastindex);
-//        console.log(leadingstring);
-//        console.log(barcodestring);
-//        console.log(trailingstring);
-//        for(x=0;x<stringlocations.length;x++){
-    //        trailingstring = singlediv.slice(matchloc + 9);
             span = "<span class=\"barcodelink\" id=\"id_goto" + barcodestring + "\">";
             newstring = leadingstring + span + barcodestring + "</span>" + trailingstring;
             console.log(newstring);
             document.getElementById(boxid).innerHTML = newstring;
-            
-            
-//        }
+
     linkcounter++;
     }
-//    console.log(document.getElementById(boxid))
+
     spans = document.getElementById(boxid).getElementsByTagName("span");
     console.log(spans.length);
     if(spans.length > 0){
@@ -1123,6 +1060,7 @@ function parseTheBox(boxid) {
 }
 
 //Search all actions for barcodes and make them clickable links
+//Only finds the first barcode in a div... its on the "one day" list
 function findBarcodes() {
     actionsarea = document.getElementById("idBandTaskAction");
     actiondivs = actionsarea.getElementsByClassName("notes");
@@ -1130,67 +1068,22 @@ function findBarcodes() {
         singlediv = actiondivs[x].innerHTML;
         actiondivs[x].id = "BM_actiondiv"+x;
         matchloc = singlediv.search(/\sT([a-z]|[0-9]){7}(\s|\.)/ig);
-        //        console.log(x);
-        //        console.log(matchloc);
-        //        console.log(singlediv.substr(matchloc+1, 8));
-        //        console.log(singlediv);
-//        if (matchloc != -1) {
-//            leadingstring = singlediv.slice(0, matchloc + 1);
-//            barcodestring = singlediv.slice(matchloc + 1, matchloc + 9);
-//            trailingstring = singlediv.slice(matchloc + 9);
-//            span = "<span class=\"barcodelink\" id=\"id_goto" + barcodestring + "\">";
-//            newstring = leadingstring + span + barcodestring + "</span>" + trailingstring;
-//            actiondivs[x].innerHTML = newstring;
-//            spanbyid = document.getElementById("id_goto" + barcodestring);
-//            (function () {
-//                var barcodestringa = barcodestring;
-//                spanbyid.addEventListener("click", function () {
-//                    goToTask(barcodestringa)
-//                });
-//            }());
-//
-//        }
         parseTheBox(actiondivs[x].id)
     }
     tablestepsarea = document.getElementById("idTableSteps");
     tablerows = tablestepsarea.getElementsByTagName("tr");
     for (x = 1; x < tablerows.length; x++) {
         rowdata = tablerows[x].getElementsByTagName("td");
-        //            console.log(x);
-        //            console.log(rowdata.length);
         if (rowdata.length == 5) {
             notecell = 4;
         } else {
             notecell = 1;
         }
-        //            console.log(rowdata[notecell].innerHTML)
         stepnote = rowdata[notecell].innerHTML;
         matchloc = stepnote.search(/\sT([a-z]|[0-9]){7}/ig);
-//        console.log(x);
         stepnotediv = rowdata[notecell].firstChild;
         stepnotediv.id = "BMstepnotediv"+x;
-//        console.log(stepnotediv);
         parseTheBox(stepnotediv.id);
-        //        console.log(x);
-        //        console.log(matchloc);
-        //        console.log(singlediv.substr(matchloc+1, 8));
-        //        console.log(singlediv);
-//        if (matchloc != -1) {
-//            leadingstring = stepnote.slice(0, matchloc + 1);
-//            barcodestring = stepnote.slice(matchloc + 1, matchloc + 9);
-//            trailingstring = stepnote.slice(matchloc + 9);
-//            span = "<span class=\"barcodelink\" id=\"id_goto" + barcodestring + "\">";
-//            newstring = leadingstring + span + barcodestring + "</span>" + trailingstring;
-//            rowdata[notecell].innerHTML = newstring;
-//            spanbyid = document.getElementById("id_goto" + barcodestring);
-//            (function () {
-//                var barcodestringa = barcodestring;
-//                spanbyid.addEventListener("click", function () {
-//                    goToTask(barcodestringa)
-//                });
-//            }());
-//
-//        }
     }
 }
 
@@ -1205,11 +1098,10 @@ function mainrun() {
     var strwithnumber = document.getElementsByClassName("headerMenuTitle")[0].href;
     var staffnostart = strwithnumber.indexOf("u=");
     var staffno = strwithnumber.substr(staffnostart + 2, 6);
-    //    console.log(usrname.split(" (Qantas)"));
-
-    if (document.getElementById("idMxTitle").innerHTML == "Timesheets") {
-        betterTimeSheet();
-    }
+//Commented this out because it was doing some weird stuff in 8.2-SP3.  Ill fix it another day.  
+//    if (document.getElementById("idMxTitle").innerHTML == "Timesheets") {
+//        betterTimeSheet();
+//    }
     if (document.getElementById("idMxTitle").innerHTML == "Work Capture") {
         corrActionBox();
         buttonInsert();
@@ -1255,4 +1147,3 @@ var markups = {
 }
 stepstatus = {}
 mainrun();
-//styleNightMode();
