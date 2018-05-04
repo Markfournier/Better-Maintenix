@@ -5,7 +5,7 @@
 
   "name": "Better Maintenix",
   "description": "Adds Extra functions to Maintenix",
-  "version": "0.7.4",
+  "version": "1.0.0",
   "options_page": "options.html",
   "background": {
   },
@@ -15,7 +15,7 @@
     
   "content_scripts": [
     {
-      "matches": ["https://qaccess.qantas.com.au/*", "*://maintenix.qantas.com.au/*", "*://mx-psup/*", "*://mx-pstg/*", "http://mxqcpdev/*"],
+      "matches": ["https://qaccess.qantas.com.au/*", "*://maintenix.qantas.com.au/*", "*://mx-psup/*", "*://mx-pstg/*"],
       "js": ["changes.js"],
       "css": ["customstyle.css"]
     }
@@ -24,8 +24,7 @@
   "permissions": [
    "activeTab", 
    "tabs",
-   "cookies",    
-   "https://av-it-services.com/"
+   "cookies"
    ],
       "web_accessible_resources": [
     "names.json"

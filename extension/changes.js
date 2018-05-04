@@ -1,134 +1,44 @@
-//Create the popups and set the fault name and description to whatever is selected
-function selectStoredFault() {
-    var definitiondrop = document.getElementById("definitiondrop");
-    var selected = definitiondrop.value;
-    var popuparray = [];
-    var characterposition = [];
-    var storedcharposition = [];
-    //    console.log(selected);
-    for (i = 0; i < selected.length; i++) {
-        //        console.log(selected.charAt(i));
-        if (selected.charAt(i) == "$") {
-            characterposition.push(i);
-
-        }
-        //        console.log(characterposition.length);
-        if (characterposition.length == 2) {
-
-            popuparray.push(selected.substring(characterposition[0] + 1, characterposition[1]));
-            storedcharposition.push(characterposition);
-            characterposition = [];
-        }
-    }
-    for (i = 0; i < storedcharposition.length; i++) {
-        var defectlocation = prompt("Input " + popuparray[i]);
-        selected = selected.replace("$" + popuparray[i] + "$", defectlocation);
-        document.getElementById("idCellFaultName").value = document.getElementById("idCellFaultName").value + " " + selected;
-    }
-    var xhr = new XMLHttpRequest();
-    var uniqueID = definitiondrop[definitiondrop.selectedIndex].getAttribute("uniquevalue");
-    //        console.log(uniqueID);
-    xhr.open("GET", "https://av-it-services.com/faultstore/schedhours.php?faultdefid=" + uniqueID, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            var resp = JSON.parse(xhr.responseText);
-            //                console.log(resp[0]);
-            document.getElementById("idInput34").value = resp;
-        }
-    }
-    xhr.send();
-
-    document.getElementById("idCellFaultDescription").value = selected;
-}
-
-function getList(area, assemblt) {
-   a = fetch(chrome.extension.getURL('/names.json'))
-          .then((resp) => resp.json())
-
-//          .then((jdata) => jdata)
-          .then(function (jsonData) {
-            console.log(hhh);
-              console.log(jsonData);
-            return  jsonData;
-    })
-
-    
-}
-
-//Puts the fault descriptions in the drop down.  Sets the value of the option to the unique ID of the fault definition
-function deployStoredFaults(faultlist) {
-    document.getElementById("definitionarea").innerHTML = '';
-    var definitiondrop = document.createElement("select");
-    definitiondrop.style.width = '603px';
-    if (faultlist.length == 0) {
-        definitiondrop.style.display = "none";
-    }
-    definitiondrop.id = "definitiondrop";
-    document.getElementById("definitionarea").appendChild(definitiondrop);
-    var blankoption = document.createElement("option");
-    definitiondrop.appendChild(blankoption)
-    for (i = 0; i < faultlist.length; i++) {
-        var newoption = document.createElement("option");
-        newoption.id = i;
-        newoption.innerHTML = faultlist[i][0];
-        newoption.setAttribute("uniquevalue", faultlist[i][2])
-        definitiondrop.appendChild(newoption);
-    }
-    document.getElementById("definitiondrop").addEventListener("change", function () {
-        selectStoredFault()
-    });
-}
-
 function getStoredFaults(area, trade, assembly) {
     document.getElementById("bm_zoneselect").style.display = "none";
     document.getElementById("bm_subzoneselect").style.display = "none";
     document.getElementById("bm_subsubzoneselect").style.display = "none";
-//    var xhr = new XMLHttpRequest();
-//    var boof = [];
-//    xhr.open("GET", "https://av-it-services.com/faultstore/fault.php?area=" + area + "&trade=" + trade + "&assy=&zone=&subzone=&subsubzone=", true);
-//    xhr.onreadystatechange = function () {
-//        if (xhr.readyState == 4) {
-//
-//            var resp = JSON.parse(xhr.responseText);
-//            //            console.log(resp[0]);
-//            deployStoredFaults(resp);
-//        }
-//    }
-//    xhr.send();
     document.getElementById("bm_subzoneselect").length = 0;
     document.getElementById("bm_subsubzoneselect").length = 0;
     getZones(area, assembly);
 
 }
 
-//What were trying to do here is grab the technical references from the Task info tab and display it on the Execution Tab
+//grab the technical references from the Task info tab and display it on the Execution Tab
 function getTechRefs() {
-    tablink = document.getElementById("idTabbedSection12").getAttribute("href");
+    var taskinfoid = "idTabbedSection12";
+    if (!document.getElementById("idTabbedSection12")) {
+        var taskinfoid = "idTabTaskInformation_link";
+    }
+    tablink = document.getElementById(taskinfoid).getAttribute("href");
     fullurl = document.location.origin + tablink;
-    //    console.log(fullurl);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", fullurl, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             parser = new DOMParser();
             response = parser.parseFromString(xhr.response, "text/html");
-            techrefform = response.getElementById("idForm36").getElementsByTagName("table")[3];
+            techrefarea = response.evaluate("//form[@name='frmRemoveTechRef']", response, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            techrefform = techrefarea.getElementsByTagName("table")[3];
             techrefrows = techrefform.getElementsByTagName("tr");
             if (techrefrows.length > 1) {
                 techrefarray = {};
                 for (rows = 1; rows < techrefrows.length; rows++) {
-                    key = techrefrows[rows].getElementsByTagName("td")[1].firstChild.innerHTML;
+                    key = techrefrows[rows].getElementsByTagName("td")[1].firstChild.textContent;
                     val = techrefrows[rows].getElementsByTagName("td")[2].firstChild.getAttribute("href");
                     techrefarray[key] = val;
                 }
                 appendTechRefs(techrefarray);
             }
-
-
         }
     }
     xhr.send();
 }
+
 //Adds all the tech references to the headerbox on the task details page
 function appendTechRefs(refarray) {
     headerbox = document.getElementById("idGBox1");
@@ -166,24 +76,7 @@ function insertPN() {
     }
 }
 
-//this functions job is to add any defined faults.  Due to the direction that the business wanted to take this extension it became unused but was never removed.  It has since been found that as it sends the ASSY in the GET request to the server it is quite a good way to collect statistics around how the extension is being used.  See HTTPS://av-it-services.com/faultstore/tracking.php
-function getDefinedFaults() {
-    assy = aircraftType();
-    area = document.getElementById("bm_areaselect").value;
-    zone = document.getElementById("bm_zoneselect").value;
-    subzone = document.getElementById("bm_subzoneselect").value;
-    subsubzone = document.getElementById("bm_subsubzoneselect").value;
-    trade = document.getElementById("bm_tradeselect").value;
-    var xmlreq = new XMLHttpRequest();
-    xmlreq.open("GET", "https://av-it-services.com/faultstore/fault.php?assy=" + assy + "&area=" + area + "&zone=" + zone + "&subzone=" + subzone + "&subsubzone=" + subsubzone + "&trade=" + trade, true);
-    xmlreq.onreadystatechange = function () {
-        if (xmlreq.readyState == 4) {
-            var resp = JSON.parse(xmlreq.responseText);
-            console.log(resp);
-        }
-    }
-    xmlreq.send();
-}
+
 
 //Gets Zones based on area and Aircraft type
 function getZones(area, assembly) {
@@ -303,7 +196,7 @@ function corrActionBox() {
     actionbox.setAttribute("style", "font-size:18px");
 }
 
-//Keep an eye on this.  Im sure the new version of Maintenix with its baselined N/A steps is going to fuck this right up
+//Standard action generator based on job card step status selection
 function makeActions() {
     altstepstatus = {}
     document.getElementById("idButtonGenerateAction").addEventListener("click", function () {
@@ -316,19 +209,11 @@ function makeActions() {
     steplist = document.getElementById("idTableSteps").children[0];
     numsteps = steplist.children.length;
     offset = 0;
-    //    console.log(numsteps)
     for (i = 1; i < numsteps; i++) {
         tbodyelement = document.getElementById("idTableSteps").children[0];
-        //                console.log(tbodyelement.children[i]);
         rowelement = tbodyelement.children[i];
-        //                console.log(rowelement)
         dataelement = rowelement.children[0];
-        //        console.log(dataelement.rowSpan);
         offset1 = dataelement.rowSpan - 1;
-        //        console.log("offset "+offset);
-        //        console.log("i "+i);
-        //        console.log("offset1 "+offset1);
-        //        console.log("---");
         i = i - offset;
         if (isJobStop() === true) {
             noteoffset = 0;
@@ -499,7 +384,7 @@ function buttonInsert() {
 //    Added a function in here to cope with the A320 family of aircraft.  So we dont have to duplicate the database for the 320 or 321, whenever we detect A32 in idCellAircraftInventory we will return "A320" as the inventory
 //    Added a bandaid in here to return "HAL" for HA aircraft.  This is so that we can have seperate naming conventions for the HALs 
 function aircraftType() {
-    var inventoryRE = new RegExp(/N([0-9]){3}HA/);
+    var inventoryRE = new RegExp(/N[0-9]{3}HA/);
     inventory = document.getElementById("idCellAircraftInventory").childNodes[1].innerHTML;
     inventoryspace = inventory.indexOf(" ");
     inventorydash = inventory.indexOf("-");
@@ -543,7 +428,7 @@ function quickJobButtons() {
 }
 
 function betterFaults() {
-    //    Defines the areas, trades and categories.  Havent moved this to a DB lookup as it should be fairly static
+    //    Defines the areas, trades and categories.  Pretty static.  Move it to a config file one day
     arealist = ["CAB", "LWE", "RWE", "MOR", "BAG", "EMP", "FUS", "IFE"];
     tradelist = ["AF", "AV", "SM", "ND", "FGAC", "FGBS", "PT", "UT", "FT", "FU"];
     catlist = ["*** GREEN ***", "*** AMBER ***", "*** RED ***", "*** ERES ***", "*** AWR ***", "*** EGR ***"]
@@ -647,6 +532,8 @@ function seperateTitle(faulttitle) {
     return lastspace;
 }
 
+
+//disabled for now. 
 function betterTimeSheet() {
     var inputboxes = document.getElementsByName("aMxHours");
     var nonMXinputboxes = document.getElementsByName("aNonMxHours");
@@ -654,7 +541,6 @@ function betterTimeSheet() {
     for (i = 0; i < inputboxes.length; i++) {
         inputboxes[i].setAttribute("tabIndex", i + 1);
         redHighlight(inputboxes[i]);
-        //        inputboxes[i].setAttribute("onblur", "redHighlight(this)")
     }
     for (i = 0; i < nonMXinputboxes.length; i++) {
         nonMXinputboxes[i].setAttribute("tabIndex", i + 1 + inputboxes.length);
@@ -710,11 +596,6 @@ function betterTaskDetails() {
                 }
             }
         }
-        //      This is commented out for now.  Its job was to hide all TMSHT labour rows on the task execution page.  The current policy with this extension is that it should not hide anything that was initially presented to the user by the maintenix designers.  As such, this will be left here in case that policy changes in the future
-        //		else if (tradecell.innerHTML == "TMSHT")
-        //		{
-        //            labourrowelements[i].style.display = "none";
-        //		}
         else if (tradecell.innerHTML == "COMPOSIT") {
             for (rowloop = 0; rowloop < tradecell.rowSpan; rowloop++) {
                 if (labourrowelements[i].className == "whiteBackground") {
@@ -776,6 +657,7 @@ function addAreaToTitle() {
     }
     //	console.log(tradeselect.value);
     //    titlebox.value = areaselect.value + " " +tradeselect.value + " " +catselect.value;
+    //why not switch?
     if (tradeselect.value == "AV") {
         skillbox.value = "AVIONICS";
     } else if (tradeselect.value == "AF") {
@@ -802,39 +684,19 @@ function addAreaToTitle() {
 
 }
 
-//this is the fix for the selected trade regression when navigating away from the Rasie Fault Page
+//this is the fix for the selected trade regression when navigating away from the Raise Fault Page
 function mapTitleTrade() {
     var titlebox1 = document.getElementById("idCellFaultName");
     var tradeselect1 = document.getElementById("bm_tradeselect");
     var areaselect1 = document.getElementById("bm_areaselect");
     spacepriortotrade = titlebox1.value.indexOf(" ");
-    //    spaceaftertrade = titlebox1.value.indexOf(" ");
     spaceaftertrade = titlebox1.value.indexOf(" ", spacepriortotrade + 1);
     actualtradecode = titlebox1.value.substring(spacepriortotrade + 1, spaceaftertrade);
     tradeselect1.value = actualtradecode;
-    //    areacodestart = titlebox1.value.lastIndexOf("***")+4;
     areacodeend = titlebox1.value.indexOf(" ");
-    actualareacode = titlebox1.value.substring(0, areacodeend)
-        //    console.log(actualareacode);
-        //    console.log(actualtradecode);
+    actualareacode = titlebox1.value.substring(0, areacodeend);
     areaselect1.value = actualareacode;
     return [actualareacode, actualtradecode]
-        //    getStoredFaults(areaselect.value, tradeselect.value, aircraftType());
-
-}
-
-//This function is included to provision for future preference functions based on user staff number
-function getSettings(staffno) {
-    var xsXML = new XMLHttpRequest();
-    xsXML.open("GET", "https://av-it-services.com/faultstore/prefs.php?usr=" + staffno, true); {
-        if (xhr.readyState == 4) {
-
-            var resp = JSON.parse(xhr.responseText);
-            console.log(resp)
-        }
-    }
-    xhr.send();
-
 }
 
 //Determine if its a task definition Add Step page
@@ -875,8 +737,6 @@ function addStepEnhancement() {
     charcountspan.id = "id_charcounter";
     textboxtd.appendChild(charcountspan);
     charcountspan.innerHTML = "0/3000";
-    //    controldiv.style.cssFloat = "right";
-    //    document.getElementById("idForm1").appendChild(controldiv);
     for (action in markups) {
         newbutton = document.createElement("Button");
         newbutton.id = "id_button_" + action;
@@ -888,11 +748,6 @@ function addStepEnhancement() {
                 wrapSelection(element)
             });
         }());
-        //        function () 
-        //            {
-        //            var element = markups[action];
-        //            newbutton.addEventListener("click", function() {wrapSelection(element)});
-        //            };
         formattingsectdata.appendChild(newbutton);
     }
     previewheaderrow = document.createElement("tr");
@@ -933,8 +788,6 @@ function getSel() {
     start = txtarea.selectionStart;
     finish = txtarea.selectionEnd;
     sel = txtarea.value.substring(start, finish);
-    //    console.log(start);
-    //    console.log(finish);
     return [start, finish]
 }
 
@@ -961,7 +814,6 @@ function charCounter() {
     counterspan = document.getElementById("id_charcounter");
     length = document.getElementById("idDescription").value.length;
     counterspan.innerHTML = length + "/3000";
-    //    console.log(txtarea.value.length);
     rawtext = document.getElementById("idDescription").value;
     rawtext = rawtext.replace(/\n/g, "<br>");
     document.getElementById("id_previewbox").innerHTML = rawtext;
@@ -980,9 +832,6 @@ function makeList(type) {
             go = 0;
         } else {
             wholelist = wholelist + "<li>" + listitem + "</li>";
-            //            console.log(listitem);
-            //            console.log(go);
-
         }
     }
     cursor = getSel();
@@ -992,7 +841,6 @@ function makeList(type) {
     selection = opentag + wholelist + closetag;
     txtarea.value = beforeselection + selection + afterselection;
     charCounter();
-    //    console.log("<ul>"+wholelist+"</ul>")
 }
 
 
@@ -1110,7 +958,8 @@ function mainrun() {
     } else if (document.getElementById("idMxTitle").innerHTML == "Task Details" && betatesters.indexOf(usrname.split(" (Qantas)")[0]) != -1) {
         betterTaskDetails();
         getTechRefs();
-        findBarcodes();
+//        Turned off findBarcodes().  Somethign in 8.2SP3 breaks it and I suspect that it has somethingt to do with the Job Card Step Applicability
+//        findBarcodes();
     } else if (document.getElementById("idMxTitle").innerHTML == "Add Non Maintenix Task Labour Booking") {
         quickJobButtons();
 
