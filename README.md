@@ -1,10 +1,16 @@
 # Better Maintenix Chrome Extension
 Adds some enhancements to the Maintenix GUI
+- Automatic creation of action based on step status selection
+- Highlight Job Card Step boxes marked as Partial or N/A with no text entered
+- Makes the corrective action box larger and increases the font size
+- Pre populates the naming conventions for faults
+- Common Non Maintenix Job Codes pre loaded on the timesheet
+- Task Card Definition easy Job Card Step markup formatting
 
 ### Usage
-Download the extension from https://chrome.google.com/webstore/detail/better-maintenix/hccnbbjehddogfldlnckijklgeibclih and chrome will manage any updates itself
+At your own risk
 
 
 ### Making changes
-This is mostly unmaintained now.  If youve got an idea for a change, make your changes and create a pull request.
+This is very infrequently maintained.  If youve got an idea for a change, make your changes and create a pull request.
 
