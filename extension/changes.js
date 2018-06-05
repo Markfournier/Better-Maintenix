@@ -304,24 +304,61 @@ function isJobStop() {
 
 }
 
+function makeClassicView() {
+    document.getElementById("idButtonClassicMode").style.display = "None";
+    steplist = document.getElementById("idTableSteps").children[0]
+    numsteps = steplist.children.length;
+    new_td = document.createElement("TD");
+    new_td.id = "idNotes_bme";
+    tbodyelement.children[0].appendChild(new_td);
+    document.getElementById("idNotes_bme").innerHTML = "Notes";
+    tbodyelement.children[0].getElementsByTagName("td")[1].style.width = "auto";
+    for (i = 0; i<numsteps-1; i++) {
+        try{
+            notebox = tbodyelement.children[i+1].getElementsByTagName("td")[1].getElementsByTagName("textarea")[0];
+            tbodyelement.children[i+1].getElementsByTagName("td")[1].style.width = "auto";
+            notebox.setAttribute("cols", "90");
+            new_td = document.createElement("TD");
+            new_td.id = "idNoteBox_"+i.toString()+"_bme";
+            new_td.appendChild(notebox);
+            if (tbodyelement.children[i+1].children[0].getAttribute("rowspan") != null) {
+                var rowoffset = parseInt(tbodyelement.children[i+1].children[0].getAttribute("rowspan"));
+                new_td.setAttribute("rowspan", rowoffset);
+                new_td.style.verticalAlign = "bottom";
+            }
+            tbodyelement.children[i+1].appendChild(new_td);  
+        }
+        catch(oops){
+            continue
+        }
+    }
+}
 
-function buttonInsert() {
+function buttonInsert(staffno) {
     //Before I knew how to use the createelement function.  Its rubbish, but it works
-    genactionbutton = "<a id=\"idButtonGenerateAction\" title=\"Generate Action\" href=\"#\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Generate Action</span></a>";
-    taskComplete = "<a id=\"idButtonTaskComplete\" title=\"Task Complete\" href=\"#\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Task Complete</span></a>";
+    genactionbutton = "<a id=\"idButtonGenerateAction\" title=\"Generate Action\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Generate Action</span></a>";
+    taskComplete = "<a id=\"idButtonTaskComplete\" title=\"Task Complete\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Task Complete</span></a>";
+    if (staffno == "318955"){
+        classicMode = "<a id=\"idButtonClassicMode\" title=\"Classic Mode\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Classic View</span></a>";
+    }
+    else { classicMode = ""}
     stepsarea = document.getElementById("idContentRow_idGrpJicSteps");
     childs = stepsarea.children[0];
     for (i = 0; i < 8; i++) {
         childs = childs.children[0];
     }
     a = childs.innerHTML;
-    childs.innerHTML = a + genactionbutton + taskComplete;
+    childs.innerHTML = a + genactionbutton + taskComplete + classicMode;
     document.getElementById("idButtonGenerateAction").addEventListener("click", function () {
         makeActions()
     });
     document.getElementById("idButtonTaskComplete").addEventListener("click", function () {
         taskCompleteWords()
     });
+    if (staffno == "318955") {
+    document.getElementById("idButtonClassicMode").addEventListener("click", function () {
+        makeClassicView()
+    });}
     steplist = document.getElementById("idTableSteps").children[0];
     //    console.log(steplist);
     numsteps = steplist.children.length;
@@ -363,7 +400,7 @@ function buttonInsert() {
 
             //                    console.log(noteoffset);
             stepstatus[idd] = document.getElementById("idSelect" + (idd + 2 - noteoffset)).selectedIndex;
-            console.log("i" + idd);
+//            console.log("i" + idd);
 
             document.getElementById("idSelect" + (idd + 2 - noteoffset)).addEventListener("change", function () {
                 jobStepWarning(idd)
@@ -952,7 +989,7 @@ function mainrun() {
 //    }
     if (document.getElementById("idMxTitle").innerHTML == "Work Capture") {
         corrActionBox();
-        buttonInsert();
+        buttonInsert(staffno);
     } else if (document.getElementById("idMxTitle").innerHTML == "Raise Fault") {
         betterFaults();
     } else if (document.getElementById("idMxTitle").innerHTML == "Task Details" && betatesters.indexOf(usrname.split(" (Qantas)")[0]) != -1) {
