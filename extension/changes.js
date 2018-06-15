@@ -338,7 +338,7 @@ function buttonInsert(staffno) {
     //Before I knew how to use the createelement function.  Its rubbish, but it works
     genactionbutton = "<a id=\"idButtonGenerateAction\" title=\"Generate Action\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Generate Action</span></a>";
     taskComplete = "<a id=\"idButtonTaskComplete\" title=\"Task Complete\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Task Complete</span></a>";
-    if (staffno == "318955"){
+    if (classicmodeuser.indexOf(staffno) != -1){
         classicMode = "<a id=\"idButtonClassicMode\" title=\"Classic Mode\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Classic View</span></a>";
     }
     else { classicMode = ""}
@@ -355,7 +355,7 @@ function buttonInsert(staffno) {
     document.getElementById("idButtonTaskComplete").addEventListener("click", function () {
         taskCompleteWords()
     });
-    if (staffno == "318955") {
+    if (classicmodeuser.indexOf(staffno) != -1) {
     document.getElementById("idButtonClassicMode").addEventListener("click", function () {
         makeClassicView()
     });}
@@ -1021,6 +1021,11 @@ var jobcodes = {
     "OH&S": "J236584"
 }
 
+
+var classicmodeuser = ["318955", 
+                       "124851", 
+                       "127387"
+                      ];
 //For the Add Step Enhancement.
 var markups = {
     "Embolden": "b",
