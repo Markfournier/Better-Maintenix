@@ -9,7 +9,7 @@ Adds some enhancements to the Maintenix GUI
     - Prepopulates the naming conventions for faults
     - Preselects the labour based on the naming convention
 - TimeSheet
-    - Common Non Maintenix Job Codes pre loaded on the timesheet
+    - Common Non Maintenix Job Codes available as quick links
 - Task Writing
     - Task Card Definition easy Job Card Step markup formatting
     - Job Card Step character counter
@@ -17,11 +17,12 @@ Adds some enhancements to the Maintenix GUI
     - Labour rows colour coded by trade
     - Makes barcode strings clickable links
     - Loads the Technical References from the Task Information tab onto the bottom of the basic task info box
+- Work Package Details
+    - Reproduces the page controls at the bottom of the page
 
 ### Usage
 At your own risk
 
 
 ### Contributing
-This is very infrequently maintained.  If you've got an idea for a change, make your changes and create a pull request.
-
+This is very infrequently maintained although PRs are welcomed
