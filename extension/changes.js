@@ -81,8 +81,8 @@ function insertPN() {
 //Gets Zones based on area and Aircraft type
 function getZones(area, assembly) {
     fetch(chrome.extension.getURL('/names.json'))
-          .then((resp) => resp.json())
-          .then(function (jsonData) {
+        .then((resp) => resp.json())
+        .then(function (jsonData) {
             var zonelist = Object.keys(jsonData[assembly][area]);
             if (zonelist.length > 0) {
                 bm_zoneselect.style.display = '';
@@ -97,9 +97,9 @@ function getZones(area, assembly) {
                 newoption.innerHTML = zonelist[i];
                 newoption.setAttribute("value", zonelist[i])
                 bm_zoneselect.appendChild(newoption);
-            
+
             }
-    })
+        })
 }
 
 //This gets the subzones based on the selected zone
@@ -114,9 +114,9 @@ function getSubZones() {
     var zoneselect = document.getElementById("bm_zoneselect").value;
     titlebox.value = areaselect + " " + tradeselect.value + " " + catselect.value + " " + zoneselect + " - ";
     zoneid = document.getElementById("bm_zoneselect").value;
-        fetch(chrome.extension.getURL('/names.json'))
-          .then((resp) => resp.json())
-          .then(function (jsonData) {
+    fetch(chrome.extension.getURL('/names.json'))
+        .then((resp) => resp.json())
+        .then(function (jsonData) {
             var zonelist = Object.keys(jsonData[aircraftType()][areaselect][zoneselect]);
             bm_subzoneselect.length = 0;
             var blankoption = document.createElement("option");
@@ -131,8 +131,8 @@ function getSubZones() {
                 newoption.innerHTML = zonelist[i];
                 newoption.setAttribute("value", zonelist[i])
                 bm_subzoneselect.appendChild(newoption);
-            }      
-    })
+            }
+        })
 }
 
 function getSubSubZones() {
@@ -146,8 +146,8 @@ function getSubSubZones() {
     var xhr = new XMLHttpRequest();
     subzoneid = document.getElementById("bm_subzoneselect").value;
     fetch(chrome.extension.getURL('/names.json'))
-          .then((resp) => resp.json())
-          .then(function (jsonData) {
+        .then((resp) => resp.json())
+        .then(function (jsonData) {
             var zonelist = Object.keys(jsonData[aircraftType()][areaselect.value][zoneselect.value][subzoneselect.value]);
             bm_subsubzoneselect.length = 0;
             var blankoption = document.createElement("option");
@@ -163,7 +163,7 @@ function getSubSubZones() {
                 newoption.setAttribute("value", zonelist[i])
                 bm_subsubzoneselect.appendChild(newoption);
             }
-    })
+        })
     insertPN();
 }
 
@@ -182,10 +182,8 @@ function addSubSubZone() {
 function redHighlight(selectedelement) {
     if (selectedelement.value == 0) {
         selectedelement.setAttribute("style", "background-color:red;color:white;");
-        //            selectedelement.style.Color = '#FFFFFF';
     } else {
         selectedelement.setAttribute("style", "background-color:white;color:black;");
-        //        selectedelement.style.backgroundColor = 'none';
     }
 }
 
@@ -278,7 +276,6 @@ function jobStepWarning(itemid) {
         noteoffset = 0;
     } else {
         noteoffset = 1;
-        //                        idd = idd + 1;
     }
     if (document.getElementsByName("aNewNote_" + itemid)[0].value == '' && (document.getElementById("idSelect" + (itemid + 2 - noteoffset)).selectedIndex == 1 || document.getElementById("idSelect" + (itemid + 2 - noteoffset)).selectedIndex == 3)) {
         document.getElementsByName("aNewNote_" + itemid)[0].style.background = '#ff2a33';
@@ -292,6 +289,7 @@ function taskCompleteWords() {
     actionboxtext = actionbox.value;
     actionbox.value = actionboxtext + "\n\nTASK COMPLETE";
 }
+
 //Determine whether a page is a job stop or finish.  Helpful when sorting out issues with tables
 function isJobStop() {
     maintable = document.getElementById("idGBox1");
@@ -313,35 +311,35 @@ function makeClassicView() {
     tbodyelement.children[0].appendChild(new_td);
     document.getElementById("idNotes_bme").innerHTML = "Notes";
     tbodyelement.children[0].getElementsByTagName("td")[1].style.width = "auto";
-    for (i = 0; i<numsteps-1; i++) {
-        try{
-            notebox = tbodyelement.children[i+1].getElementsByTagName("td")[1].getElementsByTagName("textarea")[0];
-            tbodyelement.children[i+1].getElementsByTagName("td")[1].style.width = "auto";
+    for (i = 0; i < numsteps - 1; i++) {
+        try {
+            notebox = tbodyelement.children[i + 1].getElementsByTagName("td")[1].getElementsByTagName("textarea")[0];
+            tbodyelement.children[i + 1].getElementsByTagName("td")[1].style.width = "auto";
             notebox.setAttribute("cols", "90");
             new_td = document.createElement("TD");
-            new_td.id = "idNoteBox_"+i.toString()+"_bme";
+            new_td.id = "idNoteBox_" + i.toString() + "_bme";
             new_td.appendChild(notebox);
-            if (tbodyelement.children[i+1].children[0].getAttribute("rowspan") != null) {
-                var rowoffset = parseInt(tbodyelement.children[i+1].children[0].getAttribute("rowspan"));
+            if (tbodyelement.children[i + 1].children[0].getAttribute("rowspan") != null) {
+                var rowoffset = parseInt(tbodyelement.children[i + 1].children[0].getAttribute("rowspan"));
                 new_td.setAttribute("rowspan", rowoffset);
                 new_td.style.verticalAlign = "bottom";
             }
-            tbodyelement.children[i+1].appendChild(new_td);  
-        }
-        catch(oops){
+            tbodyelement.children[i + 1].appendChild(new_td);
+        } catch (oops) {
             continue
         }
     }
 }
 
 function buttonInsert(staffno) {
-    //Before I knew how to use the createelement function.  Its rubbish, but it works
+    //This should be changed to a function to create buttons.  This way is garbage.
     genactionbutton = "<a id=\"idButtonGenerateAction\" title=\"Generate Action\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Generate Action</span></a>";
     taskComplete = "<a id=\"idButtonTaskComplete\" title=\"Task Complete\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Task Complete</span></a>";
-    if (classicmodeuser.indexOf(staffno) != -1){
+    if (classicmodeuser.indexOf(staffno) != -1) {
         classicMode = "<a id=\"idButtonClassicMode\" title=\"Classic Mode\" class=\"largeButton\" style=\"\"><span class=\"largeButtonTextCell\">Classic View</span></a>";
+    } else {
+        classicMode = ""
     }
-    else { classicMode = ""}
     stepsarea = document.getElementById("idContentRow_idGrpJicSteps");
     childs = stepsarea.children[0];
     for (i = 0; i < 8; i++) {
@@ -356,52 +354,28 @@ function buttonInsert(staffno) {
         taskCompleteWords()
     });
     if (classicmodeuser.indexOf(staffno) != -1) {
-    document.getElementById("idButtonClassicMode").addEventListener("click", function () {
-        makeClassicView()
-    });}
+        document.getElementById("idButtonClassicMode").addEventListener("click", function () {
+            makeClassicView()
+        });
+    }
     steplist = document.getElementById("idTableSteps").children[0];
-    //    console.log(steplist);
     numsteps = steplist.children.length;
-    //    console.log(numsteps);
-    //    if (isJobStop() === true)
-    //    {
-    //        offset = 0;
-    //    }
-    //    else
-    //    {
-    //        offset = 1;
-    //    }
     offset = 0;
     for (i = 1; i < numsteps; i++) {
         tbodyelement = document.getElementById("idTableSteps").children[0];
-        //                console.log(tbodyelement.children[i]);
         rowelement = tbodyelement.children[i];
-        //                console.log(rowelement)
         dataelement = rowelement.children[0];
-        //                console.log(dataelement.rowSpan);
         offset1 = dataelement.rowSpan - 1;
-
-        //                console.log(offset);
-        //                console.log(offset1);
-        //                console.log("i = "+i);
-        //                console.log(i-offset);
-
-        //                i=i+offset;
-
         (function (idd) {
             //This if statement fixes the issue with job card step status boxes being identified differently on job stop and finish. any changes here may need to be replicated in jobStepWarning()
             if (isJobStop() === true) {
                 noteoffset = 0;
             } else {
                 noteoffset = 1;
-                //                        idd = idd + 1;
             }
             status = document.getElementById("idSelect" + (idd + 2 - noteoffset));
 
-            //                    console.log(noteoffset);
             stepstatus[idd] = document.getElementById("idSelect" + (idd + 2 - noteoffset)).selectedIndex;
-//            console.log("i" + idd);
-
             document.getElementById("idSelect" + (idd + 2 - noteoffset)).addEventListener("change", function () {
                 jobStepWarning(idd)
             }, false);
@@ -411,10 +385,7 @@ function buttonInsert(staffno) {
         }(i - offset));
         offset = offset + offset1;
         i = i + offset1;
-        //                console.log("---------");
-        //            console.log(document.getElementById("idSelect" + (i+2)).selectedIndex);
     }
-
 }
 
 //    Get the inventory type.  This will help when we need to narrow down defined faults later.  It returns the AC type i.e "A330" or "737"
@@ -429,10 +400,9 @@ function aircraftType() {
     if (inventory.substr(0, 3) == "A32") {
         inventory = "A320";
     }
-    if (inventoryRE.test(document.getElementById("idCellAircraftInventory").childNodes[1].innerHTML) == true){
+    if (inventoryRE.test(document.getElementById("idCellAircraftInventory").childNodes[1].innerHTML) == true) {
         inventory = "HAL";
     }
-//    console.log(inventory);
     return inventory;
 }
 
@@ -445,9 +415,7 @@ function addJobNumber(number) {
 
 //Generates The buttons for commonly used job codes.  Define the jobcodes at the bottom of the script
 function quickJobButtons() {
-    //    console.log(jobcodes);
     for (job in jobcodes) {
-        //        console.log(jobcodes[job]);
         newbutton = document.createElement("Button");
         newbutton.id = "insert" + jobcodes[job]
         newbutton.className = "mxlikebutton";
@@ -480,7 +448,6 @@ function betterFaults() {
     cell1.className = "paraHeader formFirstCol optional";
     var cell2 = quickrow.insertCell(1);
     cell2.setAttribute("colspan", "3")
-        //    quickrow.insertCell(2);
     cell1.innerHTML = "Quick Fault Builder:";
     var workareaselect = document.createElement("select");
     workareaselect.id = "bm_areaselect"
@@ -632,8 +599,7 @@ function betterTaskDetails() {
                     labourrowelements[i].className = "utilitydark";
                 }
             }
-        }
-        else if (tradecell.innerHTML == "COMPOSIT") {
+        } else if (tradecell.innerHTML == "COMPOSIT") {
             for (rowloop = 0; rowloop < tradecell.rowSpan; rowloop++) {
                 if (labourrowelements[i].className == "whiteBackground") {
                     labourrowelements[i].className = "compositelight";
@@ -904,44 +870,47 @@ function parseTheBox(boxid) {
     matchloc = singlediv.search(barcodeRE);
     lastindex = 0;
     linkcounter = 0;
-    
+
     stringlocations = new Array();
     while (matchloc != -1) {
-        if (matchloc == -1){break;}
-        
-        stringoffset = linkcounter*63+lastindex;
-        leadingstring = document.getElementById(boxid).innerHTML.slice(0, matchloc + 1+stringoffset);
-        barcodestring = document.getElementById(boxid).innerHTML.slice(matchloc + 1+stringoffset, matchloc + 9+stringoffset);
-        trailingstring = document.getElementById(boxid).innerHTML.slice(matchloc + 9+stringoffset);
+        if (matchloc == -1) {
+            break;
+        }
 
-        stringlocations[barcodestring] = matchloc+lastindex;
+        stringoffset = linkcounter * 63 + lastindex;
+        leadingstring = document.getElementById(boxid).innerHTML.slice(0, matchloc + 1 + stringoffset);
+        barcodestring = document.getElementById(boxid).innerHTML.slice(matchloc + 1 + stringoffset, matchloc + 9 + stringoffset);
+        trailingstring = document.getElementById(boxid).innerHTML.slice(matchloc + 9 + stringoffset);
+
+        stringlocations[barcodestring] = matchloc + lastindex;
         lastindex = matchloc;
-        singlediv = singlediv.slice(lastindex+9);
+        singlediv = singlediv.slice(lastindex + 9);
         matchloc = singlediv.search(barcodeRE);
-            span = "<span class=\"barcodelink\" id=\"id_goto" + barcodestring + "\">";
-            newstring = leadingstring + span + barcodestring + "</span>" + trailingstring;
-            console.log(newstring);
-            document.getElementById(boxid).innerHTML = newstring;
+        span = "<span class=\"barcodelink\" id=\"id_goto" + barcodestring + "\">";
+        newstring = leadingstring + span + barcodestring + "</span>" + trailingstring;
+        console.log(newstring);
+        document.getElementById(boxid).innerHTML = newstring;
 
-    linkcounter++;
+        linkcounter++;
     }
 
     spans = document.getElementById(boxid).getElementsByTagName("span");
     console.log(spans.length);
-    if(spans.length > 0){
-    for (singlespan=0;singlespan<spans.length;singlespan++){
-        (function () {
-            console.log(singlespan);
+    if (spans.length > 0) {
+        for (singlespan = 0; singlespan < spans.length; singlespan++) {
+            (function () {
+                console.log(singlespan);
                 var barcodestringa = spans[singlespan].innerHTML;
                 spanbyid = document.getElementById("id_goto" + barcodestringa);
-//                var barcodestringa = barcodestring;
+                //                var barcodestringa = barcodestring;
                 console.log(barcodestringa);
                 spanbyid.addEventListener("click", function () {
                     goToTask(barcodestringa)
                 });
             }());
-    }}
-    
+        }
+    }
+
 }
 
 //Search all actions for barcodes and make them clickable links
@@ -951,7 +920,7 @@ function findBarcodes() {
     actiondivs = actionsarea.getElementsByClassName("notes");
     for (x = 0; x < actiondivs.length; x++) {
         singlediv = actiondivs[x].innerHTML;
-        actiondivs[x].id = "BM_actiondiv"+x;
+        actiondivs[x].id = "BM_actiondiv" + x;
         matchloc = singlediv.search(/\sT([a-z]|[0-9]){7}(\s|\.)/ig);
         parseTheBox(actiondivs[x].id)
     }
@@ -967,26 +936,32 @@ function findBarcodes() {
         stepnote = rowdata[notecell].innerHTML;
         matchloc = stepnote.search(/\sT([a-z]|[0-9]){7}/ig);
         stepnotediv = rowdata[notecell].firstChild;
-        stepnotediv.id = "BMstepnotediv"+x;
+        stepnotediv.id = "BMstepnotediv" + x;
         parseTheBox(stepnotediv.id);
     }
 }
 
+//Duplicate the page controls at the bottom of the workscope
+function duplicatePageControls() {
+    toptable = document.getElementById("idTableWorkscope_optionsTable").cloneNode(true);
+    document.getElementById("idTableWorkscope_optionsTable").parentNode.parentNode.parentNode.parentNode.appendChild(toptable);
 
+
+}
 
 //This runs on every page load...  Its job is to determine the page title and the user and then enable the correct enhancements for that page.
 //It also grabs the users staff number.  Its a provision for user settings specific settings in the future.  The idea is a setting is stored on the server and can then follow the user to different computers
 function mainrun() {
     betatesters = ["Gavin Jamieson", "Charles Laczina", "Timothy Baker", "Colin Ryan", "Richard Crossley", "Johannes Deysel", "Shane Finigan", "Owen Gilmour", "Zoran Jajcevic", "Wayne Lawson", "Gregory Nelson", "Michael Everist", "Abraham Hatzakortzian"];
     usrname = document.getElementsByClassName("username-display")[0].innerHTML;
-    document.getElementsByClassName("username-display")[0].innerHTML = usrname + "<b> Enhanced Mode</b>";
+    //    document.getElementsByClassName("username-display")[0].innerHTML = usrname + "<b> Enhanced Mode</b>";
     var strwithnumber = document.getElementsByClassName("headerMenuTitle")[0].href;
     var staffnostart = strwithnumber.indexOf("u=");
     var staffno = strwithnumber.substr(staffnostart + 2, 6);
-//Commented this out because it was doing some weird stuff in 8.2-SP3.  Ill fix it another day.  
-//    if (document.getElementById("idMxTitle").innerHTML == "Timesheets") {
-//        betterTimeSheet();
-//    }
+    //Commented this out because it was doing some weird stuff in 8.2-SP3.  Ill fix it another day.  
+    //    if (document.getElementById("idMxTitle").innerHTML == "Timesheets") {
+    //        betterTimeSheet();
+    //    }
     if (document.getElementById("idMxTitle").innerHTML == "Work Capture") {
         corrActionBox();
         buttonInsert(staffno);
@@ -995,13 +970,16 @@ function mainrun() {
     } else if (document.getElementById("idMxTitle").innerHTML == "Task Details" && betatesters.indexOf(usrname.split(" (Qantas)")[0]) != -1) {
         betterTaskDetails();
         getTechRefs();
-//        Turned off findBarcodes().  Somethign in 8.2SP3 breaks it and I suspect that it has somethingt to do with the Job Card Step Applicability
-//        findBarcodes();
+        //        Turned off findBarcodes().  Somethign in 8.2SP3 breaks it and I suspect that it has somethingt to do with the Job Card Step Applicability
+        //        findBarcodes();
     } else if (document.getElementById("idMxTitle").innerHTML == "Add Non Maintenix Task Labour Booking") {
         quickJobButtons();
 
     } else if (document.getElementById("idMxTitle").innerHTML == "Add Step" && isTaskDefn() == true) {
         addStepEnhancement();
+    } else if (document.getElementById("idMxTitle").innerHTML == "Work Package Details" && document.getElementById("idTableWorkscope_pageCount") != null) {
+        duplicatePageControls();
+
     }
 }
 
@@ -1022,8 +1000,8 @@ var jobcodes = {
 }
 
 
-var classicmodeuser = ["318955", 
-                       "124851", 
+var classicmodeuser = ["318955",
+                       "124851",
                        "127387"
                       ];
 //For the Add Step Enhancement.
