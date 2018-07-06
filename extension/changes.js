@@ -952,7 +952,20 @@ function duplicatePageControls() {
 //This runs on every page load...  Its job is to determine the page title and the user and then enable the correct enhancements for that page.
 //It also grabs the users staff number.  Its a provision for user settings specific settings in the future.  The idea is a setting is stored on the server and can then follow the user to different computers
 function mainrun() {
-    betatesters = ["Gavin Jamieson", "Charles Laczina", "Timothy Baker", "Colin Ryan", "Richard Crossley", "Johannes Deysel", "Shane Finigan", "Owen Gilmour", "Zoran Jajcevic", "Wayne Lawson", "Gregory Nelson", "Michael Everist", "Abraham Hatzakortzian"];
+    betatesters = ["Gavin Jamieson", 
+                   "Charles Laczina", 
+                   "Timothy Baker", 
+                   "Colin Ryan", 
+                   "Richard Crossley", 
+                   "Johannes Deysel", 
+                   "Shane Finigan", 
+                   "Owen Gilmour", 
+                   "Zoran Jajcevic", 
+                   "Wayne Lawson", 
+                   "Gregory Nelson", 
+                   "Michael Everist", 
+                   "Abraham Hatzakortzian", 
+                   "Michael Fitzgerald"];
     usrname = document.getElementsByClassName("username-display")[0].innerHTML;
     //    document.getElementsByClassName("username-display")[0].innerHTML = usrname + "<b> Enhanced Mode</b>";
     var strwithnumber = document.getElementsByClassName("headerMenuTitle")[0].href;
@@ -1002,7 +1015,8 @@ var jobcodes = {
 
 var classicmodeuser = ["318955",
                        "124851",
-                       "127387"
+                       "127387",
+                       "128980"
                       ];
 //For the Add Step Enhancement.
 var markups = {
