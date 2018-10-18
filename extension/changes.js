@@ -952,20 +952,18 @@ function duplicatePageControls() {
 //This runs on every page load...  Its job is to determine the page title and the user and then enable the correct enhancements for that page.
 //It also grabs the users staff number.  Its a provision for user settings specific settings in the future.  The idea is a setting is stored on the server and can then follow the user to different computers
 function mainrun() {
-    betatesters = ["Gavin Jamieson", 
-                   "Charles Laczina", 
-                   "Timothy Baker", 
-                   "Colin Ryan", 
-                   "Richard Crossley", 
-                   "Johannes Deysel", 
-                   "Shane Finigan", 
-                   "Owen Gilmour", 
-                   "Zoran Jajcevic", 
-                   "Wayne Lawson", 
-                   "Gregory Nelson", 
-                   "Michael Everist", 
-                   "Abraham Hatzakortzian", 
-                   "Michael Fitzgerald"];
+    betatesters = ["318955", 
+                   "250384", 
+                   "346915", 
+                   "301086", 
+                   "139134", 
+                   "119765", 
+                   "325191", 
+                   "319637", 
+                   "561826", 
+                   "318953",
+                   "108071",
+                   "296015"];
     usrname = document.getElementsByClassName("username-display")[0].innerHTML;
     //    document.getElementsByClassName("username-display")[0].innerHTML = usrname + "<b> Enhanced Mode</b>";
     var strwithnumber = document.getElementsByClassName("headerMenuTitle")[0].href;
@@ -980,10 +978,10 @@ function mainrun() {
         buttonInsert(staffno);
     } else if (document.getElementById("idMxTitle").innerHTML == "Raise Fault") {
         betterFaults();
-    } else if (document.getElementById("idMxTitle").innerHTML == "Task Details" && betatesters.indexOf(usrname.split(" (Qantas)")[0]) != -1) {
+    } else if (document.getElementById("idMxTitle").innerHTML == "Task Details" && betatesters.indexOf(staffno) != -1) {
         betterTaskDetails();
         getTechRefs();
-        //        Turned off findBarcodes().  Somethign in 8.2SP3 breaks it and I suspect that it has somethingt to do with the Job Card Step Applicability
+        //        Turned off findBarcodes().  Somethign in 8.2SP3 breaks it and I suspect that it has something to do with the Job Card Step Applicability
         //        findBarcodes();
     } else if (document.getElementById("idMxTitle").innerHTML == "Add Non Maintenix Task Labour Booking") {
         quickJobButtons();
