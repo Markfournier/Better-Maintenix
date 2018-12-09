@@ -949,6 +949,28 @@ function duplicatePageControls() {
 
 }
 
+function insertSparkyButton() {
+        newbutton = document.createElement("Button");
+        newbutton.id = "sparkyfilter";
+        newbutton.className = "mxlikebutton";
+        codetext = document.createTextNode("Active Sparky Tasks");
+        newbutton.appendChild(codetext);
+        document.getElementById("idTableWorkscope_cellSelectDeselect").appendChild(newbutton)
+        newbutton.addEventListener("click", quickSparkyFilter);
+}
+
+//Inserts a button to quickly filter the work package for sparky tasks
+function quickSparkyFilter() {
+    var selectbox = document.getElementById("idLabourSkill");
+    document.getElementById("idActiveAndInWork").checked = true;
+    for (var element in selectbox.childNodes) {
+        if (selectbox.childNodes[element].value == "AVIONICS" || selectbox.childNodes[element].value == "ELECT") {
+            selectbox.childNodes[element].selected = true;
+        }
+    }
+    location.href = "javascript:onClick_idTabWorkscopeSearchFilterButton(); void 0";
+}
+
 //This runs on every page load...  Its job is to determine the page title and the user and then enable the correct enhancements for that page.
 //It also grabs the users staff number.  Its a provision for user settings specific settings in the future.  The idea is a setting is stored on the server and can then follow the user to different computers
 function mainrun() {
@@ -988,8 +1010,11 @@ function mainrun() {
 
     } else if (document.getElementById("idMxTitle").innerHTML == "Add Step" && isTaskDefn() == true) {
         addStepEnhancement();
-    } else if (document.getElementById("idMxTitle").innerHTML == "Work Package Details" && document.getElementById("idTableWorkscope_pageCount") != null) {
+    } else if (document.getElementById("idMxTitle").innerHTML == "Work Package Details")  {
+        if (document.getElementById("idTableWorkscope_pageCount") != null){
         duplicatePageControls();
+        }
+        insertSparkyButton()
 
     }
 }
