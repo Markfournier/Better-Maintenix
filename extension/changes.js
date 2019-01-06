@@ -971,6 +971,18 @@ function quickSparkyFilter() {
     location.href = "javascript:onClick_idTabWorkscopeSearchFilterButton(); void 0";
 }
 
+//Fix the issue where the complete all button seems to lose its click event listener.  This is a band aid as something in the extension itself is breaking the native functionality and I cant narrow down what it is.
+function fixCompleteAll() {
+    var stepstable = document.getElementById("idTableSteps");
+    var stepsselects = stepstable.getElementsByTagName("select");
+    for (var selector =0; selector < stepsselects.length; selector++) {
+        var stepoptions = stepsselects[selector].selectedIndex;
+        if (stepoptions == 0 || stepoptions == 1) {
+            stepsselects[selector].selectedIndex = 2;
+        }
+    }
+}
+
 //This runs on every page load...  Its job is to determine the page title and the user and then enable the correct enhancements for that page.
 //It also grabs the users staff number.  Its a provision for user settings specific settings in the future.  The idea is a setting is stored on the server and can then follow the user to different computers
 function mainrun() {
@@ -998,6 +1010,7 @@ function mainrun() {
     if (document.getElementById("idMxTitle").innerHTML == "Work Capture") {
         corrActionBox();
         buttonInsert(staffno);
+        document.getElementById("idButtonCompleteAll").addEventListener("click", fixCompleteAll);
     } else if (document.getElementById("idMxTitle").innerHTML == "Raise Fault") {
         betterFaults();
     } else if (document.getElementById("idMxTitle").innerHTML == "Task Details" && betatesters.indexOf(staffno) != -1) {
