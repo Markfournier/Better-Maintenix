@@ -1,10 +1,13 @@
 function getStoredFaults(area, trade, assembly) {
-//    document.getElementById("bm_zoneselect").style.display = "none";
-//    document.getElementById("bm_subzoneselect").style.display = "none";
-//    document.getElementById("bm_subsubzoneselect").style.display = "none";
-//    document.getElementById("bm_subzoneselect").length = 0;
-//    document.getElementById("bm_subsubzoneselect").length = 0;
-    getZones(area, assembly);
+    document.getElementById("bm_zoneselect").style.display = "none";
+    document.getElementById("bm_subzoneselect").style.display = "none";
+    document.getElementById("bm_subsubzoneselect").style.display = "none";
+    document.getElementById("bm_subzoneselect").length = 0;
+    document.getElementById("bm_subsubzoneselect").length = 0;
+    if (assembly != 'A330'){
+        getZones(area, assembly);    
+    }
+    
 
 }
 
@@ -459,21 +462,21 @@ function betterFaults() {
     catselect.id = "bm_catselect"
     cell2.appendChild(catselect);
 
-//    var zoneselect = document.createElement("select");
-//    zoneselect.id = "bm_zoneselect"
-//    cell2.appendChild(zoneselect);
-//
-//    var subzoneselect = document.createElement("select");
-//    subzoneselect.id = "bm_subzoneselect"
-//    cell2.appendChild(subzoneselect);
-//
-//    var subsubzoneselect = document.createElement("select");
-//    subsubzoneselect.id = "bm_subsubzoneselect"
-//    cell2.appendChild(subsubzoneselect);
-//
-//    var definitionspan = document.createElement("span");
-//    definitionspan.id = "definitionarea";
-//    cell2.appendChild(definitionspan);
+    var zoneselect = document.createElement("select");
+    zoneselect.id = "bm_zoneselect"
+    cell2.appendChild(zoneselect);
+
+    var subzoneselect = document.createElement("select");
+    subzoneselect.id = "bm_subzoneselect"
+    cell2.appendChild(subzoneselect);
+
+    var subsubzoneselect = document.createElement("select");
+    subsubzoneselect.id = "bm_subsubzoneselect"
+    cell2.appendChild(subsubzoneselect);
+
+    var definitionspan = document.createElement("span");
+    definitionspan.id = "definitionarea";
+    cell2.appendChild(definitionspan);
 
 
     document.getElementById("bm_areaselect").addEventListener("change", function () {
@@ -485,15 +488,15 @@ function betterFaults() {
     document.getElementById("bm_catselect").addEventListener("change", function () {
         addAreaToTitle()
     });
-//    document.getElementById("bm_zoneselect").addEventListener("change", function () {
-//        getSubZones()
-//    });
-//    document.getElementById("bm_subzoneselect").addEventListener("change", function () {
-//        getSubSubZones()
-//    });
-//    document.getElementById("bm_subsubzoneselect").addEventListener("change", function () {
-//        addSubSubZone()
-//    });
+    document.getElementById("bm_zoneselect").addEventListener("change", function () {
+        getSubZones()
+    });
+    document.getElementById("bm_subzoneselect").addEventListener("change", function () {
+        getSubSubZones()
+    });
+    document.getElementById("bm_subsubzoneselect").addEventListener("change", function () {
+        addSubSubZone()
+    });
     for (i = 0; i < arealist.length; i++) {
         var opt = document.createElement("option");
         var newopt = document.createTextNode(arealist[i]);
@@ -516,7 +519,7 @@ function betterFaults() {
     if (document.getElementById("idCellFaultName").value == '') {
         document.getElementById("idCellFaultName").value = "CAB AF *** GREEN *** ";
         document.getElementById("idSelect9").value = "MECH";
-//        getStoredFaults("CAB", "AF", aircraftType());
+        getStoredFaults("CAB", "AF", aircraftType());
 
     } else {
         refreshitems = mapTitleTrade()
@@ -525,9 +528,9 @@ function betterFaults() {
     document.getElementById("idLabelScheduledHours").style.display = "";
     document.getElementById("idCellScheduledHours").style.display = "";
     document.getElementById("idCellFaultName").focus();
-//    document.getElementById("bm_zoneselect").style.display = "none";
-//    document.getElementById("bm_subzoneselect").style.display = "none";
-//    document.getElementById("bm_subsubzoneselect").style.display = "none";
+    document.getElementById("bm_zoneselect").style.display = "none";
+    document.getElementById("bm_subzoneselect").style.display = "none";
+    document.getElementById("bm_subsubzoneselect").style.display = "none";
 }
 
 function seperateTitle(faulttitle) {
@@ -645,7 +648,7 @@ function addAreaToTitle() {
     var tradeselect = document.getElementById("bm_tradeselect");
     var catselect = document.getElementById("bm_catselect");
     var titlebox = document.getElementById("idCellFaultName");
-//    getStoredFaults(areaselect.value, tradeselect.value, aircraftType());
+    getStoredFaults(areaselect.value, tradeselect.value, aircraftType());
     //    seperateTitle(titlebox.value);
     //    console.log("a "+storedfaults[1]);
     if (titlebox.value.lastIndexOf("***") > 1) {
