@@ -1000,7 +1000,8 @@ function mainrun() {
                    "561826", 
                    "318953",
                    "108071",
-                   "296015"];
+                   "296015",
+                   "989569"];
     usrname = document.getElementsByClassName("username-display")[0].innerHTML;
     //    document.getElementsByClassName("username-display")[0].innerHTML = usrname + "<b> Enhanced Mode</b>";
     var strwithnumber = document.getElementsByClassName("headerMenuTitle")[0].href;
