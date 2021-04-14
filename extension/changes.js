@@ -1073,6 +1073,19 @@ function pasteData(textboxelement) {
     document.execCommand('paste');
 }
 
+function addAEDTtoElement() {
+    //Add AEDT time to datetime elements
+    var date_time_elements = document.getElementsByClassName("dateTime");
+    for (i = 0; i < date_time_elements.length; i++) {
+        date_time_elements[i].append(" (" + UTCtoAEDT(date_time_elements[i].innerHTML) + ")");
+    }
+}
+
+function UTCtoAEDT(datestring) {
+    //Take a date stamp in UTC and return it in AEDT
+    var UTCdate = new Date(Date.parse(datestring));
+    return UTCdate.toLocaleString('en-GB', {timeZone: 'Australia/Sydney'}) + " AEDT";
+}
 
 //This runs on every page load...  Its job is to determine the page title and the user and then enable the correct enhancements for that page.
 //It also grabs the users staff number.  Its a provision for user settings specific settings in the future.  The idea is a setting is stored on the server and can then follow the user to different computers
@@ -1126,7 +1139,18 @@ function mainrun() {
         insertFilterButton("Structures", ["SHMTL", "STRUCT"]);
     } else if (document.getElementById("idMxTitle").innerHTML == "Task Definition Search") {
         addPasteButton("idTaskCode");
-    }
+    //For Open and Historical flights, add an AEDT time next to the UTC time
+    } else if (document.getElementById("idMxTitle").innerHTML == "Inventory Details") {
+        if (document.getElementById("Open_link").classList.contains("tabOn")) {
+            if (document.getElementById("OpenFlights_link").classList.contains("tabOn")) {
+                addAEDTtoElement();
+            }
+            }   else if (document.getElementById("Historical_link").classList.contains("tabOn")) {
+            if (document.getElementById("HistoricalFlights_link").classList.contains("tabOn")) {
+                addAEDTtoElement();
+            }
+            }
+    } 
 }
 
 //For the Timesheet enhancement, add the works order name and number to this KV list.  the J is important.
