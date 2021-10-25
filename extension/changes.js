@@ -1155,18 +1155,21 @@ function mainrun() {
 
 //For the Timesheet enhancement, add the works order name and number to this KV list.  the J is important.
 var jobcodes = {
-    "Standing & Waiting": "J80000",
-    "Hangar Cleaning": "J84000",
-    "Supervision": "J334519",
-    "Toolbox Meetings": "J268708",
-    "Training": "J282083",
-    "Unactioned Abscence": "J80073",
-    "Read and Signs": "J290286",
-    "Aids to Production": "J84101",
-    "LH-Timesheets": "J80301",
+    "Productive Time Lost": "J80000",
     "Approved Non-Productive": "J277330",
-    "Daily 5S": "J332506",
-    "OH&S": "J236584"
+    "Hangar Cleaning": "J84000",
+    "Aids to Production": "J84101",
+    "Maintenance Memos": "J290286",
+    "OH&S Duties": "J236584",
+    "Daily 5S Duties": "J332506",
+    "Union Duties": "J80060",
+    "First Aid": "J173040",
+    "Toolbox Meetings": "J268708",
+    "Fire Evacuation and Drills": "J282082",
+    "Supervision": "J334519",
+    "332 Towing": "J332TOW",
+    "333 Towing": "J333TOW",
+    "738 Towing": "J738TOW"
 }
 
 
