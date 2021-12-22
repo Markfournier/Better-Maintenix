@@ -1159,7 +1159,7 @@ var jobcodes = {
     "Approved Non-Productive": "J277330",
     "Hangar Cleaning": "J84000",
     "Aids to Production": "J84101",
-    "Maintenance Memos": "J290286",
+    "Online Training": "J310837",
     "OH&S Duties": "J236584",
     "Daily 5S Duties": "J332506",
     "Union Duties": "J80060",
@@ -1169,7 +1169,9 @@ var jobcodes = {
     "Supervision": "J383388",
     "332 Towing": "J332TOW",
     "333 Towing": "J333TOW",
-    "738 Towing": "J738TOW"
+    "738 Towing": "J738TOW",
+    "Jetstar A320 Towing": "J348019",
+    "IT Issues": "J343187"
 }
 
 
