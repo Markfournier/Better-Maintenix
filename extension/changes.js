@@ -1166,7 +1166,7 @@ var jobcodes = {
     "First Aid": "J173040",
     "Toolbox Meetings": "J268708",
     "Fire Evacuation and Drills": "J282082",
-    "Supervision": "J334519",
+    "Supervision": "J383388",
     "332 Towing": "J332TOW",
     "333 Towing": "J333TOW",
     "738 Towing": "J738TOW"
