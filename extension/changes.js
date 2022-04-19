@@ -1139,6 +1139,8 @@ function mainrun() {
         insertFilterButton("Structures", ["SHMTL", "STRUCT"]);
     } else if (document.getElementById("idMxTitle").innerHTML == "Task Definition Search") {
         addPasteButton("idTaskCode");
+    } else if (document.getElementById("idMxTitle").innerHTML == "Part Search") {
+        addPasteButton("idOEMPartNo");
     //For Open and Historical flights, add an AEDT time next to the UTC time
     } else if (document.getElementById("idMxTitle").innerHTML == "Inventory Details") {
         if (document.getElementById("Open_link").classList.contains("tabOn")) {
