@@ -1062,6 +1062,7 @@ function addPasteButton(assoc_input) {
     document.getElementById(assoc_input).parentElement.appendChild(pastebutton);
     pastebutton.addEventListener("click", function () {
                     pasteData(assoc_input)
+         location.href = "javascript:onClick_idButtonSearch()";
                 }, false);
     
 }
